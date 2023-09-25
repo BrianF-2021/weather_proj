@@ -1,0 +1,143 @@
+:root {
+    --body-bg: hsl(191, 94%, 65%);
+    --main-bg: hsl(0, 0%,100%);
+    --text-size: 2rem;
+
+}
+
+body {
+    display: block;
+    margin: 0 auto;
+    width: 90%;
+    background-color: var(--body-bg);
+    border: solid 1px black;
+}
+
+.container {
+    max-width: 50%;
+    border: solid 1px black;
+}
+
+
+
+.main{
+    padding-top: 4.5rem;
+    height: fit-content;
+    display: block;
+    background-color: var(--main-bg);
+    z-index: -5;
+    box-shadow: 5px 5px 5px 10px rgba(0,0,0, .6);
+    min-width: 300px;
+}
+
+.main h2 span {
+    font-size: 2.5rem;
+    margin-right: 1rem;
+}
+
+
+#current_image{
+    max-width: 300px;
+    margin: 0rem 1.5rem;
+}
+
+
+.loc-icon {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 2rem 0rem;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    height: fit-content;
+    margin: 0rem 1.5rem;
+
+}
+
+.info h3 {
+    text-decoration: underline;
+    font-size: 2rem;
+}
+
+.datetime {
+    display: flex;
+    flex-direction: column;
+}
+
+.datetime div{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.datetime div h6 {
+    margin-right: .5rem;
+}
+
+/* .daily_image img{
+    width: 75%;
+} */
+
+
+/* .current-table {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: fit-content;
+} */
+
+/* .col-one {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 50%;
+    height: 5rem;
+
+} */
+
+/* .col-one p {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.col-one span {
+    font-size: 1.5rem;
+}
+
+.col-two {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width:50%;
+} */
+
+
+@media (max-width: 600px) {
+    tr {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .loc-icon{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .info {
+        margin-left: 0px;
+        margin-bottom: 3rem;
+    }
+
+}
+
+#forecast {
+    margin-top: 25px;
+}

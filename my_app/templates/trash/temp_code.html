@@ -1,0 +1,176 @@
+<div style="background-image:url('/my_app/static/pics/northern_lights.jpg');
+background-size: 100% 100%;">
+	<h1 style="color:red;">Hello World</h1>
+</div>
+
+
+<button class="btns" onclick="window.location.href='/user/home'">Home</button>
+<button class="btns" onclick="window.location.reload(true)">Start Over</button>
+
+
+
+<div class="d-flex flex-column justify-content-center align-items-center mb-5">
+	<div class = "d-flex flex-column w-40 justify-content-between align-items-center">
+		<h1>Create A User</h1>
+		<form action="/users/creating" method = "POST">
+		<div class="col-sm-4"></div>
+			<div class = "mb-3 mt-3">
+				<label for="first_name">First Name: </label>
+				<input class="" style = "align-content: flex-end" type="text" name = "first_name" placeholder="First Name" >
+			</div>
+
+			<div class = "mb-3 mt-3">
+				<label for="last_name">Last Name: </label>
+				<input class="" type="text" name = "last_name" placeholder="Last Name">
+			</div>
+
+			<div class = "mb-3 mt-3">
+				<label for="email">Email: </label>
+				<input class="" type="text" name = "email" placeholder="Email" >
+			</div>
+
+			<div class = "mb-3 mt-3">
+				<label for="password">Password: </label>
+				<input type="password" name = "password" placeholder="Password">
+			</div>
+
+			<div class = "mb-3 mt-3">
+				<label for="confirm_password">Confirm Password: </label>
+				<input type="password" name = "confirm_password" placeholder="Confirm_Password">
+			</div>
+			<div class = "d-flex flex-row w-40 pt-5 justify-content-between align-items-center">
+				<input class="btn btn-sm btn-default border border-dark btn-grey button buttonLonger" type="submit" value = "Save User">
+				<a class="btn btn-sm btn-default border border-dark btn-grey button buttonLonger" href="/main">Cancel</a>
+			</div>
+		</div>
+		</form>
+	</div>
+</div>
+</div>
+
+<div class="container" >
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+	{% for message in messages %}
+		<p>{{message}}</p>
+	{% endfor %}
+{% endif %}
+{% endwith %}
+
+<h1 class="m-3 text-center pb-3 border_bottom text_color" >Login</h1>
+<form action="/users/validation" method = "POST">
+<div class="col-sm-4"></div>
+	<div class = "mb-3 mt-3">
+		<label for="email">Email: </label>
+		<input class="" type="text" name = "email" placeholder="Email">
+	</div>
+
+	<div class = "mb-3 mt-3">
+		<label for="password">Password: </label>
+		<input type="password" name = "password" placeholder="Password">
+	</div>
+
+	<div class = "d-flex flex-row w-40 pt-5 justify-content-between align-items-center">
+		<input class="btn btn-sm btn-default border border-dark btn-grey button buttonLonger" type="submit" value = "LogIn">
+		<a class="btn btn-sm btn-default border border-dark btn-grey button buttonLonger" href="/main">Cancel</a>
+	</div>
+</div>
+</form>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body class="pizza">
+	<div class="d-flex flex-column w-100 text-light">
+		<h1 class="m-3 text-center title_grad txt_grad pb-3 border_bottom pt-3 border_top" >Tony's Pizza</h1>
+		<div class="d-flex flex-row">
+			<div class="container" >
+				<h1 class="m-3 pb-3 text-center border_bottom text_color" >Register</h1>
+
+			 	<div class="d-flex flex-column justify-content-center align-items-center mb-5">
+
+				    <form:form class="form-control w-75 opacity" method="POST" action="/registering" modelAttribute="user">
+		   		        <p class="mb-3 mt-t">
+				            <form:label path="firstName">First Name: </form:label>
+				            <form:errors class="text-danger" path="firstName"/>
+				            <form:input class="form-control" type="text" placeholder="First Name" path="firstName"/>
+				        </p>
+
+				       	<p class="mb-3 mt-t">
+				            <form:label path="lastName">Last Name: </form:label>
+				            <form:errors class="text-danger" path="lastName"/>
+				            <form:input class="form-control" type="text" placeholder="Last Name" path="lastName"/>
+				        </p>
+				        <p class="mb-3 mt-t">
+				            <form:label path="email">Email: </form:label>
+				            <form:errors class="text-danger" path="email"/>
+				            <form:input class="form-control" type="email" placeholder="Email" path="email"/>
+				        </p>
+				        		   		        <p class="mb-3 mt-t">
+				            <form:label path="address">Address: </form:label>
+				            <form:errors class="text-danger" path="address"/>
+				            <form:input class="form-control" type="text" placeholder="Address" path="address"/>
+				        </p>
+
+				       	<p class="mb-3 mt-t">
+				            <form:label path="city">City: </form:label>
+				            <form:errors class="text-danger" path="city"/>
+				            <form:input class="form-control" type="text" placeholder="City" path="city"/>
+				        </p>
+				        <p class="mb-3 mt-t">
+				            <form:label path="state">State: </form:label>
+				            <form:errors class="text-danger" path="state"/>
+				            <form:input class="form-control" type="text" placeholder="State" path="state"/>
+				        </p>
+				        <p class="mb-3 mt-t">
+				            <form:label path="password">Password: </form:label>
+				            <form:errors class="text-danger" path="password"/>
+				            <form:password class="form-control" placeholder="Password" path="password"/>
+				        </p>
+				        <p class="mb-3 mt-t">
+				            <form:label path="passwordConfirmation">Confirm Password: </form:label>
+				            <form:errors class="text-danger" path="passwordConfirmation"/>
+				            <form:password class="form-control" placeholder="Password" path="passwordConfirmation"/>
+				        </p>
+				        <input class="btns" type="submit" value="Register"/>
+				    </form:form>
+			     </div>
+			</div>
+
+			<div class="container" >
+				<h1 class="m-3 text-center pb-3 border_bottom text_color" >Login</h1>
+
+				<div class="d-flex flex-column justify-content-center align-items-center mb-5">
+				    <p class="text-danger" ><c:out value="${loginError}" /></p>
+				    <form class="form-control w-75 opacity" method="post" action="/loggingIn">
+				        <p class="mb-3 mt-t">
+				            <label for="email">Email: </label>
+				            <input class="form-control" placeholder="Email" type="text" id="email" name="email"/>
+				        </p>
+				        <p class="mb-3 mt-t">
+				            <label for="password">Password: </label>
+				            <input class="form-control" placeholder="Password" type="password" id="password" name="password"/>
+				        </p>
+				        <input class="btns" type="submit" value="Login"/>
+				    </form>
+			    </div>
+		    </div>
+
+	    </div>
+    </div>
+</body>
+</html>

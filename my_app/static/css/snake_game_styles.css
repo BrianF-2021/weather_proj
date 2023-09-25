@@ -1,0 +1,99 @@
+*{
+    border: 0 none;
+    outline: 0;
+    padding: 0;
+    margin: 0;
+}
+
+.container
+{
+    background-color: rgb(214, 57, 9);
+    margin: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 900px;
+}
+
+#name
+{
+    color: black;
+    font-style: italic;
+    border-bottom: 3px solid black;
+    font-size: 75px;
+}
+
+.scoreBoard
+{
+    background-color: salmon;
+}
+
+body
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+}
+
+th
+{
+    width: 200px;
+    padding: 8px 16px;
+}
+
+tr
+{
+    font-size: 20px;
+    background-color: lightgray;
+}
+
+.pad
+{
+    padding: 8px 16px;
+}
+
+#game
+{
+    position: relative;
+    box-shadow: black 20px 10px 50px;
+}
+
+.btns
+{
+    color: black;
+    width: 200px;
+    height: 50px;
+    background-color: darkgrey;
+    margin: 50px;
+    font-size: 35px;
+    box-shadow: 2px 2px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.btns:hover
+{
+    background-color: grey;
+    color: black;
+}
+
+.optionsBar
+{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+}
+
+#font
+{
+    font-size: 50px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+
