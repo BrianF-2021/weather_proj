@@ -1,3 +1,7 @@
 env/
 *.pyc
+<<<<<<< HEAD
 config/
+=======
+config/
+>>>>>>> 84fc58e75b5965a05bb4db221117d90b0f4ac9dd
