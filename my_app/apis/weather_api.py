@@ -1,6 +1,7 @@
 # python3 -m venv env/myenv
 # source env/myenv/bin/activate
 # pip install flask PyMysql flask-bcrypt
+# test commit
 from my_app.apis import geo_locator_api
 from geopy.geocoders import Nominatim
 import requests
@@ -197,9 +198,6 @@ class Weather_Api:
             # print(f'DAY OBJECT {i}: {day_obj.icon}')
         return self.forecast
 
-
     def print_wx_data(self):
         self.get_json_wx_data()
         print(self.weather_data)
-
-
