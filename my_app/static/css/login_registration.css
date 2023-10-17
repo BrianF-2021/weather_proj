@@ -1,0 +1,209 @@
+:root {
+    --label-font-size: 1.5rem;
+    --label-font-weight: bold;
+    --font-size: 1rem;
+    --label-margin-right: 1rem;
+    --label-color: black;
+    --border-color: black;
+}
+
+*{
+    border: 0 none;
+    outline: 0;
+    padding: 0;
+    margin: 0;
+    }
+
+::-webkit-scrollbar {
+    width: .7rem;
+}
+
+::-webkit-scrollbar-track {
+    background-color: rgba(0,0,0,0,0);
+    width: .5rem;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: grey;
+    border-radius: 6px;
+}
+
+body {
+    padding: .4rem;
+}
+
+
+.bg_image
+{
+	background-image:url("/static/pics/summer_valley_mnt_range.jpg");
+	background-size: cover;
+	background-repeat: no-repeat;
+	width: 100%;
+	height: 100vh;
+    background-attachment: fixed;
+}
+
+label {
+    font-size: var(--label-font-size);
+    font-weight: var(--label-font-weight);
+    color: var(--label-color);
+}
+
+input {
+    font-size: var(--font-size);
+    height: 2rem;
+    padding-left: .2rem;
+}
+
+.txt_grad
+{
+	animation: txt_color 10s ease-in-out infinite;
+/* 	position: relative; */
+}
+
+@keyframes txt_color
+{
+	0%
+	{
+/* 		background-color: black; */
+		color: yellow;
+	}
+	25%
+	{
+/* 		background-color: darkgrey; */
+		color: orange;
+	}
+	50%
+	{
+		color: red;
+	}
+	75%
+	{
+/* 		background-color: black; */
+		color: orange;
+	}
+	100%
+	{
+		color: yellow;
+	}
+}
+
+
+.title_grad
+{
+	background: linear-gradient(to right, darkgrey, black, darkgrey);
+}
+
+.main_div
+{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    color: white;
+    min-width: 300px;
+}
+
+.title_bar {
+	border-bottom: 1px solid var(--border-color);
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+    align-items: center;
+    margin: 1rem;
+    padding-top: 1rem 0;
+}
+
+.container_box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    background-color: rgba(120, 128, 139, 0.5);
+    border-radius: 2rem;
+    padding: 2rem;
+}
+
+.boxes {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    margin: .3rem;
+}
+
+.boxes h1{
+    /* margin: 1rem 0; */
+    /* padding-bottom: 1rem; */
+    border-bottom: 2px solid var(--border-color);
+    border-top: 2px solid var(--border-color);
+    text-align: center;
+    color: black;
+    padding: .3rem;
+}
+
+.a_box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.a_box form {
+    width: 80%;
+}
+
+.buttons_box {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	justify-content: space-around;
+	align-items: center;
+	padding: 2rem;
+	z-index: 1;
+}
+
+.button {
+    background-color: green;
+    border-radius: 4rem;
+    padding: .5rem;
+    width: 6rem;
+    height: fit-content;
+    box-shadow: 4px 4px 4px rgba(3, 3, 3, 1);
+}
+
+.button:hover {
+    color: white;
+    background-color: rgb(37, 170, 37);
+    box-shadow: 2px 2px 2px rgba(68, 67, 67, 0.5);
+
+}
+
+@media (min-width: 1300px) {
+    .container_box {
+        justify-content: space-around;
+    }
+
+    .boxes {
+        width: 30%;
+    }
+}
+
+
+@media (max-width: 600px) {
+    .container_box {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 3rem;
+    }
+
+    .boxes {
+        width: 80%;
+        height: fit-content;
+        padding-bottom: 3rem;
+    }
+
+}
+
+
+
+
+

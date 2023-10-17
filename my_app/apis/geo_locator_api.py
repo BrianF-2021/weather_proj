@@ -1,4 +1,5 @@
 from geopy.geocoders import Nominatim
+from my_app.error_logging import logger
 
 
 class GeoLocator:
@@ -11,7 +12,10 @@ class GeoLocator:
         try:
             location = self.geolocator.geocode(city_state)
         except Exception as e:
-            print(f"GeoLocator 'get_coord' error: {e}")
+
+            logger.logger.error(
+                f"'geo_locator_api.py => get_coord(), line 17' error: {e}")
+            # print(f"GeoLocator 'get_coord' error: {e}")
             return (lat, lon)
         # print("GEOLOCATOR: location - ", location)
         if location:

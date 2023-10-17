@@ -1,0 +1,28 @@
+<div class="top_bar">
+
+    <nav class="navbar">
+        <div class="nav-title"> WEATHER </div>
+        <div class="toggle-button">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+        <div class="navbar-links">
+            <ul>
+                <li><a class="links" href="/users/edit/{{this_user.id}}">Edit Profile</a></li>
+                <li><a class="links" href="/weather_page/{{this_user.id}}">Weather</a></li>
+                <li><a class="links" href="/logout">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="wx_search_bar">
+        <form action="/local_weather/{{this_user.id}}" method="POST">
+            <div class="city_state_search">
+                <label for="city_state">Local Weather: </label>
+                <input type="text" name = "city_state" placeholder="City State">
+            </div>
+            <input class="wx-submit-btn"  type="submit" value = "Submit">
+        </form>
+    </div>
+
+</div>

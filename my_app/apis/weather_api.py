@@ -7,8 +7,9 @@ from geopy.geocoders import Nominatim
 import requests
 import os
 import json
-from my_app.time.datetime_converter import DateTime_Converter as DTC
+from my_app.misc.datetime_converter import DateTime_Converter as DTC
 from my_app.models import current_weather, daily_weather
+from my_app.error_logging import logger
 
 
 # change class name to Weather_Api
@@ -25,7 +26,9 @@ class Weather_Api:
         try:
             geolocation = self.geolocator.get_coord(self.city_state)
         except Exception as e:
-            print(f"'get_json_wx_data' geolocator error: {e}")
+            logger.logger.error(
+                f"'weather_api.py => get_json_wx_data(), line 30' geolocator error: {e}")
+            # print(f"'get_json_wx_data' geolocator error: {e}")
             return
 
         latitude, longitude = geolocation
@@ -34,7 +37,9 @@ class Weather_Api:
         try:
             api_data = requests.get(api_link)
         except Exception as e:
-            print(f"'get_json_wx_data' error: {e}")
+            logger.logger.error(
+                f"'weather_api.py => get_json_wx_data(), line 41' error: {e}")
+            # print(f"'weather_api.py => get_json_wx_data' error: {e}")
             return
 
         print("API data: ", api_data)
@@ -77,8 +82,10 @@ class Weather_Api:
     def get_current_weather_data(self):
         self.get_json_wx_data()
         if not self.weather_data:
-            print("No weather data...check error logging")
-            return
+            print(
+                "'weather_api.py => get_current_weather_data(), line 86' => No weather data...check error logging")
+            return current_weather.Current_Weather()
+
         current = self.weather_data['current']
         print('CURRENT WEATHER: ', json.dumps(current, indent=4))
         _, _, sunrise = self.dt.get_datetime_formatted_from_unix(
@@ -130,12 +137,19 @@ class Weather_Api:
             current_wx['snow'] = current['snow']['1h']
         else:
             current_wx['snow'] = 0
-        print(current_wx)
-        current_wx_obj = current_weather.Current_Weather(current_wx)
+        # print(current_wx)
+        current_wx_obj = current_weather.Current_Weather()
+        current_wx_obj.set_instance_attributes(current_wx)
+        # print(current_wx_obj)
         return current_wx_obj
 
     def get_daily_forecast(self):
         # print("5_DAY_FORECAST: ", self.weather_data['daily'])
+        if not self.weather_data:
+            print(
+                "'weather_api.py => get_daily_forecast(), line 147' => No weather data...check error logging")
+            return []
+
         for i, day in enumerate(self.weather_data['daily']):
             data = {}
             # print(f"day {i}: {day}")
@@ -184,7 +198,7 @@ class Weather_Api:
             data['weather_id'] = day['weather'][0]['id']
             data['weather_description'] = day['weather'][0]['description']
             data['clouds'] = day['clouds']
-            data['pop'] = day['pop']
+            data['pop'] = int(day['pop']*100)
             data['rain'] = rain
             data['snow'] = snow
             data['uvi'] = uvi
@@ -192,10 +206,11 @@ class Weather_Api:
             data['created_at'] = None
             data['updated_at'] = None
             # print(f'DAY {i}: {data}')
-            day_obj = daily_weather.Daily_Weather(data)
-            if i <= 4:
+            day_obj = daily_weather.Daily_Weather()
+            day_obj.set_instance_attributes(data)
+            if i <= 5:
                 self.forecast.append(day_obj)
-            # print(f'DAY OBJECT {i}: {day_obj.icon}')
+            print(f'DAY OBJECT {i}: {day_obj.icon}')
         return self.forecast
 
     def print_wx_data(self):

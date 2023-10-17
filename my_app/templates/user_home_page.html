@@ -11,67 +11,65 @@
 
      <link rel="stylesheet" href="{{ url_for('static', filename = 'css/home.css') }}">
 
-    <script type="text/javascript" src="{{ url_for('static', filename = 'script/javascript.js') }}" defer></script>
+     <link rel="stylesheet" href="{{ url_for('static', filename = 'css/styles.css') }}">
+
+
+     <link rel="stylesheet" href="{{ url_for('static', filename = 'css/top_bar.css') }}">
+
+     <link rel="stylesheet" href="{{ url_for('static', filename = 'css/navbar.css') }}">
+
+     <script type="text/javascript" src="{{ url_for('static', filename = 'script/navbar.js') }}" defer></script>
+
+    <!-- <script type="text/javascript" src="{{ url_for('static', filename = 'script/javascript.js') }}" defer></script> -->
 
 
 
 </head>
-<body class="bg-dark" id="body">
-	<div class="package bgLightBlack bgImage">
-		<h1 class="title_grad txt_grad title_bar opacity" ><span class="white ">My Projects Page</span></h1>
-		<div class="taskbar">
+<body class="bg-image">
+    <div class="top_bar">
 
-			<p class="turquoise_txt width25"><span>Welcome </span> - {{user.first_name}} {{user.last_name}}</p>
-            <form class="city_state_search" action="/local_weather/{{user.id}}" method="POST">
-                <div class="wx-search">
+        <nav class="navbar">
+            <div class="nav-title">HOME</div>
+            <div class="toggle-button">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            <div class="navbar-links">
+                <ul>
+                    <li><a class="links" href="/users/edit/{{this_user.id}}">Edit Profile</a></li>
+                    <li><a class="links" href="/weather_page/{{this_user.id}}">Weather</a></li>
+                    <li><a class="links" href="/logout">Logout</a></li>
+                </ul>
+            </div>
+        </nav>
+        <!-- <div class="wx_search_bar">
+            <form action="/local_weather/{{this_user.id}}" method="POST">
+                <div class="city_state_search">
                     <label for="city_state">Local Weather: </label>
                     <input type="text" name = "city_state" placeholder="City State">
-                    <input id="submit-btn" class="btn btn-sm btn-default border border-dark btn-light button buttonLonger" type="submit" value = "Submit">
                 </div>
+                <input class="wx-submit-btn"  type="submit" value = "Submit">
             </form>
-			<div class="taskbarBtns">
-                <!-- <a class="links" href="/weather">Weather</a> -->
-				<a class="links" href="/users/edit/{{user.id}}">Edit Profile</a>
-				<a class="links" href="/logout">Logout</a>
-			</div>
-		</div>
+        </div> -->
 
-        <div class="d-flex flex-column align-items-center width50 mt-3">
-            <h3 class="txt_bordered bold">~ Games ~</h3>
-            <div class = "commentbox">
+    </div>
+
+
+    <div class="main_body">
+
+        <div id="games">
+            <h3>~ Games ~</h3>
+            <div id = "game_list_box">
                 {% for game in all_games %}
-                <div class="reportings">
-                    <a class="links bold black" href="/game/{{game.name}}/{{game.id}}">{{game.name}} {{game.id}}</a>
+                <div>
+                    <a class="games_links" href="/game/{{game.name}}/{{game.id}}">{{game.name}} {{game.id}}</a>
                 </div>
                 {% endfor %}
             </div>
         </div>
+
     </div>
 
 </body>
 </html>
-
-<!-- <div class="openBtns">
-    <button class="openButton" id="popup" onclick="openForm()">Form</button>
-</div> -->
-<!-- <div class="loginPopup">
-    <div class="formPopup" id="popupForm">
-        <p class="tag">This is my PopUp!!</p>
-        <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-    </div>
-</div> -->
-
-
-
-
-<!-- <div class="container border-dark p-4 posrelative mainDiv">
-    <div class = "container opac">
-        <h2 class="tag">{{ user.first_name }} {{ user.last_name }}'s Home Page</h2>
-        <p class="tag">ID: {{ user.id }}</p>
-        <p class="tag">Name: {{ user.first_name }} {{ user.last_name }}</p>
-        <p class="tag">Email: {{ user.email }}</p>
-        <p class="tag">Created On: {{ user.created_at }}</p>
-        <p class="tag">Last Updated On: {{ user.updated_at }}</p>
-        <a class="tag" href="/users/edit/{{user.id}}">Edit your profile</a>
-    </div>
-</div> -->

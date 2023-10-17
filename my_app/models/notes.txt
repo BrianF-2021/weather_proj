@@ -1,3 +1,415 @@
+        <div class = "container">
+            <h2 class="mb-5">{{ this_user.first_name }} {{ this_user.last_name }}</h2>
+            <p class="bold mb-1">ID: <p class="ms-3">{{ this_user.id }}</p></p>
+            <p class="bold mb-1">Name: <p class="ms-3">{{ this_user.first_name }} {{ this_user.last_name }}</p></p>
+            <p class="bold mb-1">Email: <p class="ms-3">{{ this_user.email }}</p></p>
+            <p class="bold mb-1">Created On: <p class="ms-3">{{ this_user.created_at }}</p></p>
+            <p class="bold mb-1">Last Updated On: <p class="ms-3">{{ this_user.updated_at }}</p></p>
+        </div>
+
+
+const toggleButton = document.getElementsByClassName('toggle-button')[0]
+const navbarLinks = document.getElementsByClassName('navbar-links')[0]
+
+toggleButton.addEventListener('click', () => {
+  navbarLinks.classList.toggle('active')
+})
+
+
+
+
+
+		<div class="d-flex flex-row">
+            <div class="container w-50" >
+                <h1 class="m-3 pb-3 text-center border_bottom text_color" >Register</h1>
+			    <div class="d-flex flex-column justify-content-center align-items-center mb-5">
+                    <form class="w-75" action="/users/creating" method = "POST">
+                        <div class = "d-flex flex-column mb-3 mt-3">
+                            <label class="bold" for="first_name">First Name: </label>
+                            <input class="" style = "align-content: flex-end" type="text" name = "first_name" placeholder="First Name" >
+                        </div>
+
+                        <div class = "d-flex flex-column mb-3 mt-3">
+                            <label class="bold" for="last_name">Last Name: </label>
+                            <input class="" type="text" name = "last_name" placeholder="Last Name">
+                        </div>
+
+                        <div class = "d-flex flex-column mb-3 mt-3">
+                            <label class="bold" for="email">Email: </label>
+                            <input class="" type="text" name = "email" placeholder="Email" >
+                        </div>
+
+                        <div class = "d-flex flex-column mb-3 mt-3">
+                            <label class="bold" for="password">Password: </label>
+                            <input type="password" name = "password" placeholder="Password">
+                        </div>
+
+                        <div class = "d-flex flex-column mb-3 mt-3">
+                            <label class="bold" for="confirm_password">Confirm Password: </label>
+                            <input type="password" name = "confirm_password" placeholder="Confirm_Password">
+                        </div>
+                        <div class = "d-flex flex-row w-40 pt-5 justify-content-around align-items-center">
+                            <input class="btn btn-sm btn-default border border-dark btn-grey button buttonLonger" type="submit" value = "Save User">
+                            <a class="btn btn-sm btn-default border border-dark btn-grey button buttonLonger" href="/main">Cancel</a>
+                        </div>
+            		</form>
+	            </div>
+            </div>
+
+            <div class="container w-50" >
+                <h1 class="m-3 text-center pb-3 border_bottom text_color" >Login</h1>
+                <div class="d-flex flex-column justify-content-center align-items-center mb-5">
+                    <form class="w-75" action="/users/validation" method = "POST">
+                    <div class = "d-flex flex-column mb-3 mt-3">
+                        <label class="bold" for="email">Email: </label>
+                            <input class="" type="text" name = "email" placeholder="Email">
+                        </div>
+
+                        <div class = "d-flex flex-column mb-3 mt-3">
+                            <label class="bold" for="password">Password: </label>
+                            <input type="password" name = "password" placeholder="Password">
+                        </div>
+
+                        <div class = "d-flex flex-row w-40 pt-5 justify-content-around align-items-center">
+                            <input class="btn btn-sm btn-default border border-dark btn-grey button buttonLonger" type="submit" value = "LogIn">
+                            <a class="btn btn-sm btn-default border border-dark btn-grey button buttonLonger" href="/main">Cancel</a>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+.this_body
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* margin: 50px; */
+    width: 100vw;
+    height: 100vh;
+}
+
+#acct_delete_body{
+    background-color: orange;
+}
+
+.main_div
+{
+    background-color: rgb(192, 189, 189, .4);
+    box-shadow:10px 10px 10px 10px rgb(70, 66, 66);
+    z-index: 3;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 10px;
+    width: 75%;
+    height: fit-content;
+
+}
+
+.main_div h1 {
+    text-align: center;
+    color: red;
+    font-weight: bolder;
+    font-size: 5rem;
+}
+
+
+.button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: lightgrey;
+    color: black;
+    border: 1px solid grey;
+    box-shadow:5px 5px 5px 5px rgb(70, 66, 66);
+    font-size: 1.2rem;
+    padding: 10px;
+    border-radius: 75px;
+    text-decoration: none;
+    width: 20%;
+}
+
+.button:hover
+{
+    background-color: darkgrey;
+    color: white;
+}
+
+#btn_delete {
+    background-color: red;
+}
+
+
+#btn_back {
+    background-color: rgb(46, 161, 199);
+}
+
+#btn_save {
+    background-color: green;
+}
+
+
+
+
+
+
+        <div class="top_bar">
+
+            <nav class="navbar">
+                <div class="nav-title"> Edit- {{user.first_name}} {{user.last_name}}
+                </div>
+
+                <div class="toggle">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+
+                <div class="nav-links pe-2">
+                    <ul>
+
+                        <li><a class="links" href="/user/home">Home</a></li>
+                        <li><a class="links" href="/weather_page/{{user.id}}">Weather</a></li>
+                        <li><a class="links" href="/logout">Logout</a></li>
+                    </ul>
+                </div>
+            </nav>
+
+
+        <div class="top_bar">
+
+            <nav class="navbar">
+                <div class="nav-title"> Welcome- {{user.first_name}} {{user.last_name}}
+                </div>
+
+                <div class="toggle">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+
+                <div class="nav-links pe-2">
+                    <ul>
+                        <li><a class="links" href="/users/edit/{{user.id}}">Edit Profile</a></li>
+                        <li><a class="links" href="/weather_page/{{user.id}}">Weather</a></li>
+                        <li><a class="links" href="/logout">Logout</a></li>
+                    </ul>
+                </div>
+            </nav>
+
+            <div class="wx_search_box">
+                <div  class="wx_search_bar">
+                    <form class="city_state_search" action="/local_weather/{{user.id}}" method="POST">
+                        <label for="city_state">Local Weather: </label>
+                        <input id="search_bar" type="text" name = "city_state" placeholder="City State">
+                        <input class="wx-submit-btn"  type="submit" value = "Submit">
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+
+
+    <div class="wx_search_box">
+      <div class="wx_search_bar">
+          <form class="city_state_search" action="/local_weather/{{this_user.id}}" method="POST">
+              <label for="city_state">Local Weather: </label>
+              <input type="text" name = "city_state" placeholder="City State">
+              <input class="wx-submit-btn"  type="submit" value = "Submit">
+          </form>
+      </div>
+    </div>
+
+
+        {% for day in forecast_wx %}
+          <div class="forecast_card">
+            <div class="forecast_card_body">
+              <img src="{{ day.icon }}" alt="Hot Sun Picture">
+              <h5>{{ day.dt }}</h5>
+              <hr>
+              <ul style="list-style-type: none; padding: 0;">
+                <li style="margin-bottom: 0.5rem;">Temp: Hi {{ day.temp_max }}°F / Lo {{ day.temp_min }}°F</li>
+                <li style="margin-bottom: 0.5rem;">Real Feel: Hi {{ day.feels_like_eve }}°F / Lo {{ day.feels_like_morn }}°F</li>
+                <li style="margin-bottom: 0.5rem;">Pressure: {{ day.pressure }}hPa</li>
+                <li style="margin-bottom: 0.5rem;">Humidity: {{ day.humidity }}%</li>
+                <li style="margin-bottom: 0.5rem;">Dew Point: {{ day.dew_point }}°F</li>
+                <li style="margin-bottom: 0.5rem;">Wind Speed: {{ day.wind_speed }}mph</li>
+                <li style="margin-bottom: 0.5rem;">Wind Direction: {{ day.wind_spind }}°</li>
+                <li style="margin-bottom: 0.5rem;">Weather: {{ day.weather_description }}</li>
+                <li style="margin-bottom: 0.5rem;">Clouds: {{ day.clouds }}%</li>
+                <li style="margin-bottom: 0.5rem;">Precipitation: {{ day.pop }}%</li>
+                <li style="margin-bottom: 0.5rem;">UV Index: {{ day.uvi }}</li>
+              </ul>
+            </div>
+          </div>
+        {% endfor %}
+
+
+
+
+
+      {% for day in forecast_wx %}
+        <div class="card forecast_card">
+          <div class="daily_image">
+            <img src={{day.icon}} class="card-img-top" alt="Hot Sun Picture">
+          </div>
+          <div class="card-body">
+              <h5 class="card-title">{{ day.dt }}</h5>
+              <ul class="list-group list-group-flush">
+                <!-- <li class="list-group-item">Day: {{ day.dt }} </li> -->
+                <li class="list-group-item  forecast_card">Temp: Hi {{ day.temp_max }}°F / Lo {{ day.temp_min }}°F</li>
+                <li class="list-group-item  forecast_card">Real Feel: Hi {{ day.feels_like_eve }}°F / Lo {{ day.feels_like_morn }}°F</li>
+                <li class="list-group-item  forecast_card">Pressure: {{ day.pressure }}hPa</li>
+                <li class="list-group-item  forecast_card">Humidity: {{ day.humidity }}%</li>
+                <li class="list-group-item  forecast_card">Dew Point: {{ day.dew_point }}°F</li>
+                <li class="list-group-item  forecast_card">Wind Speed: {{ day.wind_speed }}mph</li>
+                <li class="list-group-item  forecast_card">Wind Direction: {{ day.wind_spind }}°</li>
+                <li class="list-group-item  forecast_card">Weather: {{ day.weather_description }}</li>
+                <li class="list-group-item  forecast_card">Clouds: {{ day.clouds }}%</li>
+                <li class="list-group-item  forecast_card">Precipitation: {{ day.pop }}%</li>
+                <li class="list-group-item  forecast_card">UV Index: {{ day.uvi }}</li>
+            </ul>
+          </div>
+        </div>
+      {% endfor %}
+
+
+
+
+
+{% for day in forecast_wx %}
+  <div style="border: 1px solid #ccc; border-radius: 0.25rem; margin-bottom: 1rem;">
+    <div style="padding: 0.5rem;">
+      <img src="{{ day.icon }}" style="max-width: 100%; height: auto; display: block; margin: 0 auto;" alt="Hot Sun Picture">
+      <h5 style="text-align: center; margin-top: 0.5rem;">{{ day.dt }}</h5>
+      <ul style="list-style-type: none; padding: 0;">
+        <li style="margin-bottom: 0.5rem;">Temp: Hi {{ day.temp_max }}°F / Lo {{ day.temp_min }}°F</li>
+        <li style="margin-bottom: 0.5rem;">Real Feel: Hi {{ day.feels_like_eve }}°F / Lo {{ day.feels_like_morn }}°F</li>
+        <li style="margin-bottom: 0.5rem;">Pressure: {{ day.pressure }}hPa</li>
+        <li style="margin-bottom: 0.5rem;">Humidity: {{ day.humidity }}%</li>
+        <li style="margin-bottom: 0.5rem;">Dew Point: {{ day.dew_point }}°F</li>
+        <li style="margin-bottom: 0.5rem;">Wind Speed: {{ day.wind_speed }}mph</li>
+        <li style="margin-bottom: 0.5rem;">Wind Direction: {{ day.wind_spind }}°</li>
+        <li style="margin-bottom: 0.5rem;">Weather: {{ day.weather_description }}</li>
+        <li style="margin-bottom: 0.5rem;">Clouds: {{ day.clouds }}%</li>
+        <li style="margin-bottom: 0.5rem;">Precipitation: {{ day.pop }}%</li>
+        <li style="margin-bottom: 0.5rem;">UV Index: {{ day.uvi }}</li>
+      </ul>
+    </div>
+  </div>
+{% endfor %}
+
+
+
+
+
+
+          <table>
+            <thead>
+                <tr>
+                    <h3 class="text-center">Current Conditions</h3>
+                    <hr>
+                </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Temperature:</th>
+                <td>{{ current_wx.temp }}F</td>
+              </tr>
+              <tr>
+                <th scope="row">Humidity:</th>
+                <td>{{ current_wx.humidity }}%</td>
+              </tr>
+              <tr>
+                <th scope="row">Dewpoint:</th>
+                <td>{{ current_wx.dew_point }}F</td>
+              </tr>
+              <tr>
+                <th scope="row">Wind Speed:</th>
+                <td>{{ current_wx.wind_speed }}mph</td>
+              </tr>
+              <tr>
+                <th scope="row">Visibility:</th>
+                <td>{{ current_wx.visibility }}mi</td>
+              </tr>
+              <tr>
+                <th scope="row">Barometer:</th>
+                <td>{{ current_wx.pressure }}mb</td>
+              </tr>
+              <tr>
+                <th scope="row">UVI:</th>
+                <td>{{ current_wx.uvi }}</td>
+              </tr>
+            </tbody>
+          </table>
+
+
+    <div class="package bg-image">
+		<h1 class="title_grad txt_grad title_bar opacity" ><span class="white ">Edit Profile</span></h1>
+		<div class="taskbar">
+
+			<p class="turquoise_txt width25"><span>Welcome </span> - {{user.first_name}} {{user.last_name}}</p>
+
+			<div class="taskbarBtns">
+                <a class="links" href="/user/home">Home</a>
+				<a class="links" href="/logout">Logout</a>
+			</div>
+		</div>
+
+
+class="btn btn-sm btn-default border border-dark btn-light button buttonLonger"
+
+
+/* .commentbox
+{
+	position: relative;
+    border: 1px black solid;
+    height: 200px;
+    width: 400px;
+    min-width: 275px;
+    min-height: 100px;
+    /* padding: 3px; */
+    /* color: black; */
+    /* background-color: white; */
+    /* overflow: hidden;
+    overflow-y: scroll; */
+
+}
+*/
+
+		<h1 class="title_grad txt_grad title_bar opacity" ><span class="white ">My Projects Page</span></h1>
+		<div class="taskbar">
+
+			<p class="turquoise_txt width25"><span>Welcome </span> - {{user.first_name}} {{user.last_name}}</p>
+            <form class="city_state_search" action="/local_weather/{{user.id}}" method="POST">
+                <div class="wx-search">
+                    <label for="city_state">Local Weather: </label>
+                    <input type="text" name = "city_state" placeholder="City State">
+                    <input id="submit-btn" class="btn btn-sm btn-default border border-dark btn-light button buttonLonger" type="submit" value = "Submit">
+                </div>
+            </form>
+			<div class="taskbarBtns">
+                <!-- <a class="links" href="/weather">Weather</a> -->
+				<a class="links" href="/users/edit/{{user.id}}">Edit Profile</a>
+				<a class="links" href="/logout">Logout</a>
+			</div>
+		</div>
+
+
+
+color: #0054ff;
+
 
 # <a class="btn btn-bg btn-default border border-dark btn-grey button buttonLonger" href="/user/home">Cancel</a>
 
@@ -147,6 +559,125 @@ user_id,lat,lon,timezone_offset,dt,sunrise,sunset,temp,feels_like,pressure,humid
 %(lat)s,%(lat)s,%(timezone_offset)s,%(dt)s,%(sunrise)s,%(sunset)s,%(temp)s,%(feels_like)s,%(pressure)s,%(humidity)s,%(dew_point)s,%(uvi)s,%(clouds)s,%(visibility)s,%(wind_speed)s,%(wind_deg)s,%(wind_gust)s,%(weatherId)s,%(description)s,%(icon)s,%(rain)s,%(snow)s,
 
 user_id,lat,lon,timezone_offset,dt,sunrise,sunset,temp,feels_like,pressure,humidity,dew_point,uvi,clouds,visibility,wind_speed,wind_deg,wind_gust,weatherId,description,icon,rain,snow,created_at,updated_at
+
+
+    # @classmethod
+    # def get_all_complete(cls):
+    #     # query = "SELECT * FROM recipes JOIN sasquatches ON sasquatches.id = recipes.sasquatch_id WHERE sasquatches.id = recipes.sasquatch_id;"
+    #     query = "SELECT * FROM users JOIN sasquatches ON sasquatches.user_id = users.id WHERE sasquatches.user_id = users.id;"
+    #     sasquatches_from_db = connectToMySQL(cls.db).query_db(query)
+    #     all = []
+    #     print("JOIN QUERY", sasquatches_from_db)
+    #     #sasquatch_instance = cls(sasquatches_from_db[0])
+    #     if not sasquatches_from_db:
+    #         print("NO RESULTS FROM JOIN QUERY")
+    #         return False
+    #         # print("USER_INSTANCE:", sasquatch_instance)
+    #         # print("USERS_FROM_DB:", sasquatches_from_db)
+    #         # return sasquatch_instance
+    #     for sasquatch in sasquatches_from_db:
+
+    #         user_data= {
+    #             'id':sasquatch['id'],
+    #             'first_name':sasquatch['first_name'],
+    #             'last_name':sasquatch['last_name'],
+    #             'email':sasquatch['email'],
+    #             'password':sasquatch['password'],
+    #             'created_at':sasquatch['created_at'],
+    #             'updated_at':sasquatch['updated_at']
+    #         }
+
+    #         sasquatch_data = {
+    #             'id' : sasquatch['sasquatches.id'],
+    #             'location' : sasquatch['location'],
+    #             'what_happened' : sasquatch['what_happened'],
+    #             'date' : sasquatch['date'],
+    #             'number' : sasquatch['number'],
+    #             'user_id' : sasquatch['user_id'],
+    #             'created_at' : sasquatch['sasquatches.created_at'],
+    #             'updated_at' : sasquatch['sasquatches.updated_at']
+    #         }
+
+    #         user_inst = cls(user_data)
+    #         user_inst.sasquatches = sas.Sasquatch(sasquatch_data)
+    #         all.append(user_inst)
+    #         print('ALL: ', all)
+    #     return all
+
+    # @classmethod
+    # def get_all_with_recipes(cls):
+    #     # query = "SELECT * FROM recipes JOIN users ON users.id = recipes.user_id WHERE users.id = recipes.user_id;"
+    #     query = "SELECT * FROM users JOIN recipes ON users.id = recipes.user_id WHERE users.id = recipes.user_id;"
+    #     users_from_db = connectToMySQL(cls.db).query_db(query)
+    #     all = []
+    #     print("JOIN QUERY", users_from_db)
+    #     #user_instance = cls(users_from_db[0])
+    #     if not users_from_db:
+    #         print("NO RESULTS FROM JOIN QUERY")
+    #         return False
+    #         # print("USER_INSTANCE:", user_instance)
+    #         # print("USERS_FROM_DB:", users_from_db)
+    #         # return user_instance
+    #     for usr in users_from_db:
+    #         recipe_data = {
+    #             'id':usr['recipes.id'],
+    #             'name':usr['name'],
+    #             'date':usr['date'],
+    #             'time':usr['time'],
+    #             'description':usr['description'],
+    #             'instructions':usr['instructions'],
+    #             'user_id':usr['user_id'],
+    #             'created_at':usr['recipes.created_at'],
+    #             'updated_at':usr['recipes.updated_at']
+    #         }
+
+    #         user_data= {
+    #             'id':usr['id'],
+    #             'first_name':usr['first_name'],
+    #             'last_name':usr['last_name'],
+    #             'email':usr['email'],
+    #             'password':usr['password'],
+    #             'created_at':usr['created_at'],
+    #             'updated_at':usr['updated_at']
+    #         }
+    #         user_inst = cls(user_data)
+    #         user_inst.recipes = recipe.Recipe(recipe_data)
+    #         all.append(user_inst)
+    #     return all
+
+    # @classmethod
+    # def get_user(cls, data):
+    #     query = "SELECT * FROM users WHERE id = %(id)s"
+    #     user_from_db = connectToMySQL(cls.db).query_db(query,data)
+    #     return cls(user_from_db[0])
+
+    # # @classmethod
+    # # def save(cls, data):
+    # #     query = "INSERT INTO users(first_name, last_name, email) VALUES(%(first_name)s, %(last_name)s,%(email)s);"
+    # #     return connectToMySQL(cls.db).query_db(query,data)
+
+    # @classmethod
+    # def edit_user(cls, data):
+    #     query = "UPDATE users SET first_name = %(first_name)s, last_name = %(last_name)s, email = %(email)s;"
+    #     data = {
+    #         'first_name' : data['first_name'],
+    #         'last_name' : data['last_name'],
+    #         'email' : data['email']
+    #     }
+    #     return connectToMySQL(cls.db).query_db(query,data)
+
+    # @classmethod
+    # def delete_user(cls, data):
+    #     query = "DELETE FROM users WHERE id = %()s"
+    #     return connectToMySQL(cls.db).query_db(query,data)
+
+    # @classmethod
+    # def delete_users(cls, data):
+    #     query = "TRUNCATE TABLE users"
+    #     return connectToMySQL(cls.db).query_db(query, data)
+
+
+
 
 
 bcrypt = Bcrypt(app)
@@ -1164,3 +1695,443 @@ PRICE_REGEX = re.compile(
 #     # def delete_paintings(cls, data):
 #     #     query = "TRUNCATE TABLE paintings"
 #     #     return connectToMySQL(cls.db).query_db(query, data)
+
+
+
+<!-- <div class="openBtns">
+    <button class="openButton" id="popup" onclick="openForm()">Form</button>
+</div> -->
+<!-- <div class="loginPopup">
+    <div class="formPopup" id="popupForm">
+        <p class="tag">This is my PopUp!!</p>
+        <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+    </div>
+</div> -->
+
+
+
+
+<!-- <div class="container border-dark p-4 posrelative mainDiv">
+    <div class = "container opac">
+        <h2 class="tag">{{ this_user.first_name }} {{ this_user.last_name }}'s Home Page</h2>
+        <p class="tag">ID: {{ this_user.id }}</p>
+        <p class="tag">Name: {{ this_user.first_name }} {{ this_user.last_name }}</p>
+        <p class="tag">Email: {{ this_user.email }}</p>
+        <p class="tag">Created On: {{ this_user.created_at }}</p>
+        <p class="tag">Last Updated On: {{ this_user.updated_at }}</p>
+        <a class="tag" href="/users/edit/{{this_user.id}}">Edit your profile</a>
+    </div>
+</div> -->
+
+
+
+##########################################################
+######   NONE EDITED ROUTES BELOW     ###################
+##########################################################
+
+    # @classmethod
+    # def get_painting_with_user(cls, data):
+    #     query = "SELECT * FROM users JOIN paintings ON users.id = paintings.user_id WHERE paintings.id = %(id)s;"
+    #     painting_from_db = connectToMySQL(cls.db).query_db(query, data)
+    #     if not painting_from_db:
+    #         print("NO RESULTS FROM JOIN QUERY")
+    #         return False
+    #         # print("USER_INSTANCE:", painting_instance)
+    #         # print("USERS_FROM_DB:", paintinges_from_db)
+    #         # return painting_instance
+    #     print("PAINTING FROM DB: ", painting_from_db)
+    #     user_data= {
+    #         'id':painting_from_db[0]['id'],
+    #         'first_name':painting_from_db[0]['first_name'],
+    #         'last_name':painting_from_db[0]['last_name'],
+    #         'email':painting_from_db[0]['email'],
+    #         'password':painting_from_db[0]['password'],
+    #         'created_at':painting_from_db[0]['created_at'],
+    #         'updated_at':painting_from_db[0]['updated_at']
+    #     }
+
+    #     painting_data = {
+    #         'id' : painting_from_db[0]['paintings.id'],
+    #         'title' : painting_from_db[0]['title'],
+    #         'description' : painting_from_db[0]['description'],
+    #         'price' : painting_from_db[0]['price'],
+    #         'user_id' : painting_from_db[0]['user_id'],
+    #         'created_at' : painting_from_db[0]['paintings.created_at'],
+    #         'updated_at' : painting_from_db[0]['paintings.updated_at']
+    #     }
+
+    #     painting_inst = cls(painting_data)
+    #     painting_inst.users = usr.User(user_data)
+    #     return painting_inst
+
+    # @classmethod
+    # def get_user_paintings(cls, data):
+    #     query = "SELECT * FROM users LEFT JOIN paintings ON users.id = paintings.user_id WHERE paintings.user_id = %(id)s;"
+    #     paintings_from_db = connectToMySQL(cls.db).query_db(query, data)
+    #     print('PAINTINGS FROM DB',paintings_from_db)
+    #     if not paintings_from_db:
+    #         print("NO RESULTS FROM JOIN QUERY")
+    #         return False
+    #         # print("USER_INSTANCE:", painting_instance)
+    #         # print("USERS_FROM_DB:", paintinges_from_db)
+    #         # return painting_instance
+    #     print("PAINTING FROM DB: ", paintings_from_db)
+    #     all = []
+    #     for painting in paintings_from_db:
+    #         user_data= {
+    #             'id':painting['id'],
+    #             'first_name':painting['first_name'],
+    #             'last_name':painting['last_name'],
+    #             'email':painting['email'],
+    #             'password':painting['password'],
+    #             'created_at':painting['created_at'],
+    #             'updated_at':painting['updated_at']
+    #         }
+
+    #         painting_data = {
+    #             'id' : painting['paintings.id'],
+    #             'title' : painting['title'],
+    #             'description' : painting['description'],
+    #             'price' : painting['price'],
+    #             'user_id' : painting['user_id'],
+    #             'created_at' : painting['paintings.created_at'],
+    #             'updated_at' : painting['paintings.updated_at']
+    #         }
+
+    #         painting_inst = cls(painting_data)
+    #         painting_inst.users = usr.User(user_data)
+    #         all.append(painting_inst)
+    #     return all
+
+    # @staticmethod
+    # def validate_painting(data):
+    #     is_valid = True # we assume this is true
+    #     if data['title'] == "":
+    #         flash("A title is required")
+    #         is_valid = False
+    #     elif len(data['title']) < 2:
+    #         flash("Title must be at least 2 characters.")
+    #         is_valid = False
+
+    #     if data['description'] == "":
+    #         flash("A description is required")
+    #         is_valid = False
+    #     elif len(data['description']) < 11:
+    #         flash("Description must be at least 10 characters.")
+    #         is_valid = False
+
+    #     if data['price'] == "":
+    #         flash("A price is required")
+    #         is_valid = False
+    #     elif not PRICE_REGEX.match(data['price']):
+    #         flash("Price must be numeric")
+    #         is_valid = False
+    #         return is_valid
+    #     elif float(data['price']) < 0:
+    #             flash("Price can not be less than 0")
+    #             is_valid = False
+
+    #     return is_valid
+
+
+#     @classmethod
+#     def get_email(cls,data):
+#         query = "SELECT * FROM paintings WHERE email = %(email)s;"
+#         result = connectToMySQL("mydb").query_db(query,data)
+#         if len(result) < 1:
+#             return False
+#         return cls(result[0])
+
+
+#     @classmethod
+#     def save_new_painting(cls, data):
+#         pw_hash = bcrypt.generate_password_hash(data['password'])
+#         print("pw_hash", pw_hash)
+#         data = {
+#             "first_name": data['first_name'],
+#             "last_name" : data['last_name'],
+#             "email" : data['email'],
+#             "password" : pw_hash,
+#         }
+#         query = "INSERT INTO paintings(first_name, last_name, email, password, created_at, updated_at) VALUES(%(first_name)s, %(last_name)s, %(email)s, %(password)s, NOW(), NOW());"
+#         return connectToMySQL(cls.db).query_db(query, data)
+
+
+#     @classmethod
+#     def save_new_password(cls, data):
+#         pw_hash = bcrypt.generate_password_hash(data['password'])
+#         print("pw_hash", pw_hash)
+#         data = {
+#             "password" : pw_hash,
+#         }
+#         query = "INSERT INTO paintings(password, updated_at) VALUES(%(password)s, NOW());"
+#         return connectToMySQL(cls.db).query_db(query, data)
+
+
+#     @staticmethod
+#     def validate_registration(data):
+#         is_valid = True # we assume this is true
+#         if len(data['first_name']) < 2 or len( data['last_name']) < 2:
+#             flash("First and Last Name  must be at least 2 characters.")
+#             is_valid = False
+
+#         if not data['first_name'].isalpha() or not data['last_name'].isalpha():
+#             flash("First and Last Name can not contain numbers")
+#             is_valid = False
+
+#         if len(data['password']) < 8 or len(data['confirm_password']) < 8:
+#             flash("Password must be at least 8 characters")
+#             is_valid = False
+
+#         if data['password'] != data['confirm_password']:
+#             flash("Passwords do not match")
+#             is_valid = False
+
+#         if not EMAIL_REGEX.match(data['email']):
+#             flash("Invalid email address!")
+#             is_valid = False
+
+#         email = {'email' : data['email']}
+#         painting = painting.get_one_by_email(email)
+#         if len(painting) > 0:
+#             flash("The email you entered is already associated with an account.")
+#             is_valid = False
+#         return is_valid
+
+
+#     @classmethod
+#     def get_one_by_email(cls, data):
+# #        print('get_one_by_email  email:', data)
+#         query = "SELECT * FROM paintings where email = %(email)s;"
+# #        print(connectToMySQL(cls.db).query_db(query, data))
+#         return (connectToMySQL(cls.db).query_db(query, data))
+
+
+#     @staticmethod
+#     def validate_login(data):
+#         is_valid = True
+#         email = {'email' : data['email']}
+#         print(email)
+#         painting = painting.get_one_by_email(email)
+#         print('painting', painting)
+#         if len(painting) == 0:
+#             flash("No account exists with this email")
+#             is_valid = False
+#             return is_valid
+#         if (data['first_name'] != painting[0]['first_name']) or (data['last_name'] != painting[0]['last_name']):
+#             flash("Invalid login credentials")
+#             is_valid = False
+#         if len(painting) != 1:
+#             flash("Invalid login credentials")
+#             is_valid = False
+#         elif is_valid and not bcrypt.check_password_hash(painting[0]['password'], data['password']):
+#             flash("Invalid login credentials")
+#             is_valid = False
+#         return is_valid
+
+
+#     @staticmethod
+#     def painting_edit_validation(data):
+#         is_valid = True # we assume this is true
+#         if len(data['first_name']) < 2 or len( data['last_name']) < 2:
+#             flash("First and Last Name  must be at least 2 characters.")
+#             is_valid = False
+
+#         if not data['first_name'].isalpha() or not data['last_name'].isalpha():
+#             flash("First and Last Name can not contain numbers")
+#             is_valid = False
+
+#         if not EMAIL_REGEX.match(data['email']):
+#             flash("Invalid email address!")
+#             is_valid = False
+
+#         email = { 'email' : data['email'] }
+#         painting = painting.get_one_by_email(email)
+#         if painting:
+#             if (data['id'] != painting[0]['id']) and (data['email'] == painting[0]['email']):
+#                 flash("The email you entered is already associated with another account.")
+#                 is_valid = False
+
+#         return is_valid
+
+
+#     @staticmethod
+#     def painting_edit_password_validation(data):
+#         is_valid = True
+#         painting_id = { 'id' :  data['id'] }
+#         pw = data['password']
+#         confirm_pw = data['confirm_password']
+#         new_pw = data['new_password']
+#         new_confirm_pw = data['confirm_new_pw']
+
+#         painting = painting.get_one(painting_id)
+#         if not bcrypt.check_password_hash(painting.password, data['password']):
+#             flash("Invalid Password")
+#             is_valid = False
+#         if pw != confirm_pw:
+#             flash("Confirm password must match password")
+#             is_valid = False
+#         if len(new_pw) < 8 or len(new_confirm_pw) < 8:
+#             flash("Password must be at least 8 characters")
+#             is_valid = False
+#         if new_pw != new_confirm_pw:
+#             flash("Confirm new password must match new password")
+#             is_valid = False
+#         return is_valid
+
+
+#     @classmethod
+#     def update_name_email(cls, data):
+#         data = {
+#             'id' : data['id'],
+#             "first_name": data['first_name'],
+#             "last_name" : data['last_name'],
+#             "email" : data['email']
+#         }
+#         query = "UPDATE paintings SET first_name = %(first_name)s, last_name = %(last_name)s, email = %(email)s, updated_at = NOW() WHERE paintings.id = %(id)s;"
+#         return connectToMySQL(cls.db).query_db(query, data)
+
+
+#     @classmethod
+#     def update_password(cls, data):
+#         pw_hash = bcrypt.generate_password_hash(data['password'])
+#         data = {
+#             "id" : data['id'],
+#             "password" : pw_hash
+#         }
+#         query = "UPDATE paintings SET password = %(password)s, updated_at = NOW() WHERE paintings.id = %(id)s;"
+#         return connectToMySQL(cls.db).query_db(query, data)
+
+
+#     @classmethod
+#     def get_all_complete(cls):
+#         # query = "SELECT * FROM recipes JOIN paintinges ON paintinges.id = recipes.painting_id WHERE paintinges.id = recipes.painting_id;"
+#         query = "SELECT * FROM paintings JOIN paintinges ON paintinges.painting_id = paintings.id WHERE paintinges.painting_id = paintings.id;"
+#         paintinges_from_db = connectToMySQL(cls.db).query_db(query)
+#         all = []
+#         print("JOIN QUERY", paintinges_from_db)
+#         #painting_instance = cls(paintinges_from_db[0])
+#         if not paintinges_from_db:
+#             print("NO RESULTS FROM JOIN QUERY")
+#             return False
+#             # print("painting_INSTANCE:", painting_instance)
+#             # print("paintingS_FROM_DB:", paintinges_from_db)
+#             # return painting_instance
+#         for painting in paintinges_from_db:
+
+#             painting_data= {
+#                 'id':painting['id'],
+#                 'first_name':painting['first_name'],
+#                 'last_name':painting['last_name'],
+#                 'email':painting['email'],
+#                 'password':painting['password'],
+#                 'created_at':painting['created_at'],
+#                 'updated_at':painting['updated_at']
+#             }
+
+#             painting_data = {
+#                 'id' : painting['paintinges.id'],
+#                 'location' : painting['location'],
+#                 'what_happened' : painting['what_happened'],
+#                 'date' : painting['date'],
+#                 'number' : painting['number'],
+#                 'painting_id' : painting['painting_id'],
+#                 'created_at' : painting['paintinges.created_at'],
+#                 'updated_at' : painting['paintinges.updated_at']
+#             }
+
+#             painting_inst = cls(painting_data)
+#             painting_inst.paintinges = sas.painting(painting_data)
+#             all.append(painting_inst)
+#             print('ALL: ', all)
+#         return all
+
+
+#     # @classmethod
+#     # def get_all_with_recipes(cls):
+#     #     # query = "SELECT * FROM recipes JOIN paintings ON paintings.id = recipes.painting_id WHERE paintings.id = recipes.painting_id;"
+#     #     query = "SELECT * FROM paintings JOIN recipes ON paintings.id = recipes.painting_id WHERE paintings.id = recipes.painting_id;"
+#     #     paintings_from_db = connectToMySQL(cls.db).query_db(query)
+#     #     all = []
+#     #     print("JOIN QUERY", paintings_from_db)
+#     #     #painting_instance = cls(paintings_from_db[0])
+#     #     if not paintings_from_db:
+#     #         print("NO RESULTS FROM JOIN QUERY")
+#     #         return False
+#     #         # print("painting_INSTANCE:", painting_instance)
+#     #         # print("paintingS_FROM_DB:", paintings_from_db)
+#     #         # return painting_instance
+#     #     for usr in paintings_from_db:
+#     #         recipe_data = {
+#     #             'id':usr['recipes.id'],
+#     #             'name':usr['name'],
+#     #             'date':usr['date'],
+#     #             'time':usr['time'],
+#     #             'description':usr['description'],
+#     #             'instructions':usr['instructions'],
+#     #             'painting_id':usr['painting_id'],
+#     #             'created_at':usr['recipes.created_at'],
+#     #             'updated_at':usr['recipes.updated_at']
+#     #         }
+
+#     #         painting_data= {
+#     #             'id':usr['id'],
+#     #             'first_name':usr['first_name'],
+#     #             'last_name':usr['last_name'],
+#     #             'email':usr['email'],
+#     #             'password':usr['password'],
+#     #             'created_at':usr['created_at'],
+#     #             'updated_at':usr['updated_at']
+#     #         }
+#     #         painting_inst = cls(painting_data)
+#     #         painting_inst.recipes = recipe.Recipe(recipe_data)
+#     #         all.append(painting_inst)
+#     #     return all
+
+
+#     # @classmethod
+#     # def get_painting(cls, data):
+#     #     query = "SELECT * FROM paintings WHERE id = %(id)s"
+#     #     painting_from_db = connectToMySQL(cls.db).query_db(query,data)
+#     #     return cls(painting_from_db[0])
+
+
+#     # # @classmethod
+#     # # def save(cls, data):
+#     # #     query = "INSERT INTO paintings(first_name, last_name, email) VALUES(%(first_name)s, %(last_name)s,%(email)s);"
+#     # #     return connectToMySQL(cls.db).query_db(query,data)
+
+
+#     # @classmethod
+#     # def edit_painting(cls, data):
+#     #     query = "UPDATE paintings SET first_name = %(first_name)s, last_name = %(last_name)s, email = %(email)s;"
+#     #     data = {
+#     #         'first_name' : data['first_name'],
+#     #         'last_name' : data['last_name'],
+#     #         'email' : data['email']
+#     #     }
+#     #     return connectToMySQL(cls.db).query_db(query,data)
+
+
+#     # @classmethod
+#     # def delete_painting(cls, data):
+#     #     query = "DELETE FROM paintings WHERE id = %()s"
+#     #     return connectToMySQL(cls.db).query_db(query,data)
+
+
+#     # @classmethod
+#     # def delete_paintings(cls, data):
+#     #     query = "TRUNCATE TABLE paintings"
+#     #     return connectToMySQL(cls.db).query_db(query, data)
+
+
+
+
+
+# import re
+# from flask_bcrypt import Bcrypt
+# bcrypt = Bcrypt(app)
+# EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
+# PRICE_REGEX = re.compile(
+#     '^[-]?([1-9]{1}[0-9]{0,}(\.[0-9]{0,2})?|0(\.[0-9]{0,2})?|\.[0-9]{1,2})$')
+# https://regexlib.com/(X(1)A(fH_1Zt9K-8cpSgQTkrRifgmQGG9_C-Q_nLDDM0bZ_HAJyCPjikPUVkFmyDSRfXHd0y0l-1fub1ngpEjEmN6CdLADFL85f4_7YNGUIdhRrF7Fmy5NFeACH6yBudcBPgI9IhxXaIm_en0YE53IcuWaDHWQdi6uGqzLzoxxwJyHkOo0Xvq3grGx5WVaa4hXAj_E0))/Search.aspx?k=currency&AspxAutoDetectCookieSupport=1

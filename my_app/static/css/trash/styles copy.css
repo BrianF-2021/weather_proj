@@ -1,0 +1,337 @@
+:root {
+    --label-font-size: 1.5rem;
+    --label-font-weight: bold;
+    --font-size: 1.5rem;
+	--label-margin-right: 1rem;
+	--label-width: 100%;
+	--input-width: 90%;
+	--label-padding-left: 1.5rem;
+	--input-padding-left: 1rem;
+}
+
+*{
+    border: 0 none;
+    outline: 0;
+    padding: 0;
+    margin: 0;
+    }
+
+label {
+	font-size: var(--label-font-size);
+	font-weight: var(--label-font-weight);
+	/* margin-right: var(--label-margin-right); */
+	width: var(--label-width);
+	padding-left: var(--label-padding-left);
+}
+
+input {
+	font-size: var(--font-size);
+	width: var(--input-width);
+	/* padding-left: var(--input-padding-left); */
+}
+
+.main_body{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	padding: 1rem;
+	margin-top: 8rem;
+}
+
+body {
+	min-width: 470px;
+}
+
+.bg-image
+{
+	background-image:url("/static/pics/northern_lights.jpg");
+	background-size: cover;
+	background-repeat: no-repeat;
+	width: 100%;
+	height: 100%;
+	background-attachment: fixed;
+}
+
+.buttons_box {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	justify-content: space-around;
+	align-items: center;
+	padding: 2rem;
+	z-index: 1;
+}
+
+@media (max-width:700px) {
+	.buttons_box {
+		padding: .2rem;
+	}
+}
+
+.buttons_box div {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+	width: 50%;
+}
+
+.forms_box {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+
+}
+
+
+.edit-btn	{
+	display: inline-block;
+	text-align: center;
+	width: fit-content;
+	/* width: 20%; */
+    padding: .2rem .2rem;
+    border-radius: 15px; /* Adjust the border-radius to control the roundness */
+    background-color: lightgrey;
+    color: black;
+    text-decoration: none; /* Removes underline if it's a link */
+    border: 1px solid grey;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+.edit-btn:hover	{
+	background-color: grey;
+	color: white
+}
+
+
+#games {
+	font-weight: bolder;
+	margin-top: 5rem;
+}
+
+
+#games h3 {
+	font-weight: bolder;
+}
+
+#game_list_box {
+    border: 1px black solid;
+    height: 200px;
+    width: 400px;
+    min-width: 275px;
+    min-height: 100px;
+	border: 1px solid grey;
+	background-color: rgba(255,255,255, .3)
+}
+
+#game_list_box div{
+	position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: 1px solid grey;
+    height: fit-content;
+	background: transparent;
+}
+
+.games_text{
+	color: #4efbed;
+	text-shadow:
+	-1px -1px 0 grey,
+	 1px -1px 0 grey,
+	-1px  1px 0 grey,
+	 1px  1px 0 grey;
+}
+
+
+.game-links
+{
+	/* -webkit-text-stroke-width: 1px; */
+	/* -webkit-text-stroke-color: #4efbed; */
+	font-size: 25px;
+	width: fit-content;
+	margin: 15px 20px;
+	text-decoration: none;
+	/* color: white; */
+	font-weight: bolder;
+}
+
+.btn_hover:hover {
+	background-color: gray;
+}
+
+
+.data_box{
+	background-color: rgba(255,255,255, .3);
+	width: 100%;
+}
+
+
+#user-form {
+	width: 100%;
+}
+
+.input-box{
+	width: 100%;
+}
+
+
+@media (max-width: 800px) {
+	.package {
+		margin-top: 3.4rem;
+	}
+}
+
+
+.profile_data {
+	display: flex;
+	flex-direction: column;
+	width: 50%
+}
+
+.profile_data h1 {
+	font-size: 3rem;
+	font-weight: bold;
+	margin-bottom: 1rem;
+}
+
+.profile_data p {
+	font-size: var(--font-size);
+}
+
+.profile_data span {
+	font-size: var(--label-font-size);
+	font-weight: var(--label-font-weight);
+	margin-right: 1rem;
+
+}
+
+.btn_save {
+    background-color: green;
+}
+
+
+
+
+
+
+
+
+
+
+.bg-image
+{
+	background-image:url("/static/pics/northern_lights.jpg");
+	background-size: cover;
+	background-repeat: no-repeat;
+	width: 100%;
+	height: 100vh;
+}
+
+label {
+    font-size: var(--label-font-size);
+    font-weight: var(--label-font-weight);
+    margin-right: var(--label-margin-right);
+}
+
+input {
+    font-size: var(--font-size);
+}
+
+.this_body
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* margin: 50px; */
+    width: 100vw;
+    height: 100vh;
+}
+
+#acct_delete_body{
+    background-color: orange;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 10rem;
+}
+
+.main_div
+{
+    background-color: rgb(192, 189, 189, .4);
+    box-shadow:10px 10px 10px 10px rgb(70, 66, 66);
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 10px;
+    width: 75%;
+    height: fit-content;
+	margin-top: 4rem;
+	min-width: 475px;
+
+}
+
+.main_div h1 {
+    text-align: center;
+    color: red;
+    font-weight: bolder;
+    font-size: 4rem;
+}
+
+.edit_pw_box {
+	display: flex;
+	flex-direction: column;
+	width: 75%;
+	height: fit-content;
+	justify-content: space-between;
+	align-items: center;
+}
+
+@media (max-width: 690px) {
+	.edit_pw_box {
+		width: 100%;
+	}
+}
+
+.button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: lightgrey;
+    color: black;
+    border: 1px solid grey;
+    box-shadow:5px 5px 5px 5px rgb(70, 66, 66);
+    font-size: 1.2rem;
+    padding: 10px;
+    border-radius: 75px;
+    text-decoration: none;
+    width: 30%;
+}
+
+.button:hover
+{
+    background-color: darkgrey;
+    color: white;
+}
+
+#btn_delete {
+    background-color: red;
+}
+
+
+#btn_back {
+    background-color: rgb(46, 161, 199);
+}
+
+#btn_save {
+    background-color: green;
+}
+

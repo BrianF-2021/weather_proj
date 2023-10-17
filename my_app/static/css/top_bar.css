@@ -1,0 +1,106 @@
+:root {
+    --body-bg: hsl(191, 94%, 65%);
+    --main-bg: hsl(194, 95%, 51%);
+    --card-bg: hsl(194, 89%, 71%);
+    --table-bg:hsl(191, 97%, 49%);
+    --text-size: 2rem;
+
+}
+
+*{
+    border: 0 none;
+	box-sizing: border-box;
+    outline: 0;
+    padding: 0;
+    margin: 0;
+    }
+
+/* .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+} */
+
+
+.top_bar{
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	height: fit-content;
+	position: fixed;
+	z-index: 5;
+
+}
+
+
+.wx_search_bar {
+	/* background-color: hsl(0, 0%, 30%); */
+	background-color: #333;
+	border: 1px solid grey;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: fit-content;
+	padding: .6rem;
+}
+
+.wx_search_bar form {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	width: 100%;
+	height: fit-content;
+	align-items: center;
+	padding: .1rem;
+}
+
+
+.city_state_search {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	width: fit-content;
+	margin-right: 1rem;
+}
+
+.city_state_search label{
+	color: white;
+	font-size: 1rem;
+	font-weight: bold;
+	width: 9rem;
+	margin-right: 0;
+	padding-left: 0;
+}
+
+.city_state_search input{
+	width: 80%;
+	padding-left: .2rem;
+}
+
+.wx-submit-btn:hover{
+	background-color: grey;
+	color: white;
+}
+
+.wx-submit-btn	{
+	display: inline-block;
+	width: fit-content;
+    padding: .2rem .2rem;
+    border-radius: 15px;
+    background-color: lightgrey;
+    color: black;
+    border: 1px solid black;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 1rem;
+	width: 4rem;
+	margin-left: .5rem;
+
+}
+
+@media (max-width: 630px) {
+	.wx_search_bar {
+		flex-direction: column;
+	}
+}

@@ -3,13 +3,48 @@
 # pip install flask PyMysql flask-bcrypt
 from my_app.config.mysqlconnection import connectToMySQL
 from my_app import app
+from my_app.misc.datetime_converter import DateTime_Converter as DTC
 
 
 class Daily_Weather:
 
     db = "my_portfolio_db"
+    forecast = []
 
-    def __init__(self, data):
+    def __init__(self):
+        # self.id = None
+        # self.lat = None
+        # self.lon = None
+        self.dt = None
+        self.sunrise = None
+        self.sunset = None
+        self.moonrise = None
+        self.moonset = None
+        self.moon_phase = None
+        self.temp_max = None
+        self.temp_min = None
+        self.feels_like_eve = None
+        self.feels_like_morn = None
+        self.pressure = None
+        self.humidity = None
+        self.dew_point = None
+        self.wind_speed = None
+        self.wind_deg = None
+        self.wind_gust = None
+        self.weather_id = None
+        self.weather_description = None
+        self.clouds = None
+        self.pop = None
+        self.rain = None
+        self.snow = None
+        self.uvi = None
+        self.icon = None
+        Daily_Weather.forecast.append(self)
+        # self.created_at = None
+        # self.updated_at = None
+        # self.user = None
+
+    def set_instance_attributes(self, data):
         # self.id = data['id']
         # self.lat = data['lat']
         # self.lon = data['lon']

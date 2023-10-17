@@ -1,15 +1,15 @@
 # from rsa import PrivateKey
 from my_app.config.mysqlconnection import connectToMySQL
 from flask import flash
-import re	# the regex module
+import re  # the regex module
 from my_app import app
 from my_app.models import user as usr
 from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
-PRICE_REGEX = re.compile ('^[-]?([1-9]{1}[0-9]{0,}(\.[0-9]{0,2})?|0(\.[0-9]{0,2})?|\.[0-9]{1,2})$')
+PRICE_REGEX = re.compile(
+    '^[-]?([1-9]{1}[0-9]{0,}(\.[0-9]{0,2})?|0(\.[0-9]{0,2})?|\.[0-9]{1,2})$')
 # https://regexlib.com/(X(1)A(fH_1Zt9K-8cpSgQTkrRifgmQGG9_C-Q_nLDDM0bZ_HAJyCPjikPUVkFmyDSRfXHd0y0l-1fub1ngpEjEmN6CdLADFL85f4_7YNGUIdhRrF7Fmy5NFeACH6yBudcBPgI9IhxXaIm_en0YE53IcuWaDHWQdi6uGqzLzoxxwJyHkOo0Xvq3grGx5WVaa4hXAj_E0))/Search.aspx?k=currency&AspxAutoDetectCookieSupport=1
-
 
 
 class Game:
@@ -21,50 +21,45 @@ class Game:
         # self.best_score_id = data['best_score_id']
         self.all_games = []
 
-
     @classmethod
     def games(cls):
-        all_games=[]
+        all_games = []
         games = ["snake", "minesweeper", "tic_tac_toe"]
         for game in games:
             data = {
-                'name' : game,
+                'name': game,
             }
             Game.save_game(data)
         return
 
     @classmethod
     def get_gameNames_listJson(cls):
-        all_games=[]
+        all_games = []
         games = ["snake", "minesweeper", "tic_tac_toe"]
         for game in games:
             data = {
-                'name' : game,
+                'name': game,
             }
             all_games.append(data)
         return all_games
 
-
-
-
     @classmethod
     def save_game(cls, data):
-        #print("data:", data)
+        # print("data:", data)
         query = "INSERT INTO games(name) VALUES(%(name)s);"
 
         data = {
-            'name':data['name'],
+            'name': data['name'],
             # 'best_score_id':data['best_score_id'],
         }
-        return connectToMySQL(cls.db).query_db(query, data) # returns id of object created/inserted
-
+        # returns id of object created/inserted
+        return connectToMySQL(cls.db).query_db(query, data)
 
     @classmethod
     def get_one_game(cls, data):
         query = "SELECT * FROM games WHERE games.id = %(id)s;"
         result = connectToMySQL(cls.db).query_db(query, data)
         return cls(result[0])
-
 
     @classmethod
     def get_all_gamesObj(cls):
@@ -78,12 +73,6 @@ class Game:
         for this_game in games_from_db:
             all.append(cls(this_game))
         return all
-
-
-
-
-
-
 
     # @classmethod
     # def get_all_games(cls):
@@ -123,8 +112,6 @@ class Game:
     #         all.append(game_inst)
     #     return all
 
-
-
     # @classmethod
     # def get_painting_with_user(cls, data):
     #     query = "SELECT * FROM users JOIN paintings ON users.id = paintings.user_id WHERE paintings.id = %(id)s;"
@@ -159,8 +146,6 @@ class Game:
     #     painting_inst = cls(painting_data)
     #     painting_inst.users = usr.User(user_data)
     #     return painting_inst
-
-
 
     # @classmethod
     # def get_user_paintings(cls, data):
@@ -201,7 +186,6 @@ class Game:
     #         all.append(painting_inst)
     #     return all
 
-
     # @staticmethod
     # def validate_painting(data):
     #     is_valid = True # we assume this is true
@@ -232,9 +216,6 @@ class Game:
 
     #     return is_valid
 
-
-
-
     # @classmethod
     # def update_painting(cls, data):
     #     data = {
@@ -247,25 +228,15 @@ class Game:
     #     query = "UPDATE paintings SET title = %(title)s, description = %(description)s, price = %(price)s, user_id = %(user_id)s, updated_at = NOW() WHERE paintings.id =  %(id)s;"
     #     return connectToMySQL(cls.db).query_db(query, data)
 
-
-
     # @classmethod
     # def delete_game(cls, data):
     #     query = "DELETE FROM games WHERE id = %(id)s;"
     #     return connectToMySQL(cls.db).query_db(query,data)
 
 
-
-
-
-
-
 ##########################################################
 ######   NONE EDITED ROUTES BELOW     ###################
 ##########################################################
-
-
-
 
 
 #     @classmethod
@@ -364,7 +335,6 @@ class Game:
 #         return is_valid
 
 
-
 #     @staticmethod
 #     def painting_edit_validation(data):
 #         is_valid = True # we assume this is true
@@ -436,8 +406,6 @@ class Game:
 #         }
 #         query = "UPDATE paintings SET password = %(password)s, updated_at = NOW() WHERE paintings.id = %(id)s;"
 #         return connectToMySQL(cls.db).query_db(query, data)
-
-
 
 
 #     @classmethod
@@ -539,7 +507,6 @@ class Game:
 #     # #     return connectToMySQL(cls.db).query_db(query,data)
 
 
-
 #     # @classmethod
 #     # def edit_painting(cls, data):
 #     #     query = "UPDATE paintings SET first_name = %(first_name)s, last_name = %(last_name)s, email = %(email)s;"
@@ -549,9 +516,6 @@ class Game:
 #     #         'email' : data['email']
 #     #     }
 #     #     return connectToMySQL(cls.db).query_db(query,data)
-
-
-
 
 
 #     # @classmethod

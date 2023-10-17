@@ -1,0 +1,138 @@
+*{
+    border: 0 none;
+    outline: 0;
+    padding: 0;
+    margin: 0;
+    }
+
+::-webkit-scrollbar {
+    width: .7rem;
+}
+
+::-webkit-scrollbar-track {
+    background-color: rgba(0,0,0,0,0);
+    width: .5rem;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: grey;
+    border-radius: 6px;
+}
+
+.acct_delete_body{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 10rem;
+}
+
+
+.main_div
+{
+    background-color: rgb(192, 189, 189, .5);
+    box-shadow:10px 10px 10px 10px rgb(70, 66, 66);
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 10px;
+    width: 75%;
+    height: 13rem;
+	margin-top: 4rem;
+	min-width: 475px;
+
+}
+
+.main_div h1 {
+    text-align: center;
+}
+
+.main_div div {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+	width: 75%;
+}
+
+
+.edit_btn	{
+
+	display: inline-block;
+	text-align: center;
+	width: 5rem;
+	/* width: 20%; */
+    padding: .2rem .3rem;
+    border-radius: 15px; /* Adjust the border-radius to control the roundness */
+    background-color: lightgrey;
+    color: black;
+    text-decoration: none; /* Removes underline if it's a link */
+    border: 1px solid grey;
+    cursor: pointer;
+    font-size: 1.2rem;
+    box-shadow: 2px 2px 2px 2px;
+
+}
+
+.edit_btn:hover	{
+	background-color: grey;
+	color: white
+}
+
+#btn_delete {
+    background-color: red;
+    color: black;
+}
+
+#btn_delete:hover {
+	background-color: grey;
+	color: white
+}
+
+.bg_grad
+{
+	animation: bg_color 10s ease-in-out infinite;
+/* 	position: relative; */
+}
+
+
+@keyframes bg_color
+{
+	0%
+	{
+
+		background-color: yellow;
+	}
+	25%
+	{
+		background-color: orange;
+	}
+	50%
+	{
+		background-color: red;
+	}
+	75%
+	{
+
+		background-color: orange;
+	}
+	100%
+	{
+		background-color: yellow;
+	}
+}
+
+
+.title_grad
+{
+	background: linear-gradient(to right, darkgrey, black, darkgrey);
+}
+
+@media (max-width: 560px) {
+    .main_div h1{
+        width: 75%;
+    }
+
+}
