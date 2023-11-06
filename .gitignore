@@ -2,3 +2,4 @@ env/
 *.pyc
 config/
 trash/
+.vscode

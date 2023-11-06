@@ -1,4 +1,5 @@
 from my_app.apis import geo_locator_api, weather_api
+from my_app.apis.get_wx_forecast import main
 from my_app.config.mysqlconnection import connectToMySQL
 from my_app import app
 from flask import render_template, redirect, request, session
@@ -6,43 +7,17 @@ from my_app.models import user as usr, game
 from my_app.misc import datetime_converter
 
 
-@app.route('/')
-def index():
-    session.clear()
-    return redirect('/main')
-
-
-@app.route('/main')
-def user_main():
-    session.clear()
-    return render_template("login_and_registration.html")
-
-
 @app.route('/create')
 def user_create():
     return render_template("login_and_registration.html")
 
 
-@app.route("/users/creating", methods=["POST"])
+@app.route("/user/creating", methods=["POST"])
 def user_creating():
     if not usr.User.validate_registration(request.form):
         return redirect('/create')
     session['id'] = usr.User.save_new_user(request.form)
-    return redirect('/user/home')
-
-
-@app.route('/user/home')
-def user_home():
-    if 'id' not in session:
-        return redirect('/')
-    user_id = session['id']
-    data = {
-        'id': user_id
-    }
-    all_games = game.Game.get_all_gamesObj()
-    this_user = usr.User.get_one(data)
-
-    return render_template("user_home_page.html", this_user=this_user, all_games=all_games)
+    return redirect('/user_local_weather')
 
 
 @app.route('/logout')
@@ -50,11 +25,12 @@ def logout():
     if 'id' not in session:
         return redirect('/')
     session.clear()
-    return redirect('/main')
+    return redirect('/')
 
 
-@app.route('/users/validation', methods=['POST'])
-def login_validation():
+@app.route('/user/validation', methods=['POST'])
+# def login_validation():
+def user_validation():
     data = {
         'email': request.form['email'],
         'password': request.form['password']
@@ -63,12 +39,13 @@ def login_validation():
     if result == False:
         return redirect('/create')
 
-    user = usr.User.get_one_by_email(data)
-    session['id'] = user.id
-    return redirect('/user/home')
+    this_user = usr.User.get_one_by_email(data)
+    session['id'] = this_user.id
+    return redirect("/user_local_weather")
+    # return redirect('/user/home')
 
 
-@app.route("/users/edit/<int:user_id>")
+@app.route("/user/edit/<int:user_id>")
 def user_edit(user_id):
     if 'id' not in session:
         return redirect('/')
@@ -79,7 +56,7 @@ def user_edit(user_id):
     return render_template('user_edit_form.html', this_user=this_user)
 
 
-@app.route("/users/editing/<int:user_id>", methods=['POST'])
+@app.route("/user/editing/<int:user_id>", methods=['POST'])
 def user_editing(user_id):
     if 'id' not in session:
         return redirect('/')
@@ -97,7 +74,7 @@ def user_editing(user_id):
     return redirect(f'/user/edit/complete')
 
 
-@app.route("/users/edit_pw/<int:user_id>")
+@app.route("/user/edit_pw/<int:user_id>")
 def edit_user_password(user_id):
     if 'id' not in session:
         return redirect('/')
@@ -145,21 +122,16 @@ def edit_complete():
     return render_template('user_profile_edit_complete.html', message=message, this_user=this_user)
 
 
-@app.route("/users/delete/<int:user_id>")
-def user_destroy(user_id):
+@app.route("/user/delete")
+def user_destroy():
     if 'id' not in session:
         return redirect('/')
     data = {
-        'id': user_id
+        'id': session['id']
     }
     session.pop('id')
     usr.User.delete(data)
-    return redirect('/main')
+    return redirect('/')
 
 
-@app.route('/confirm/delete/<int:user_id>')
-def confirm_delete(user_id):
-    if 'id' not in session:
-        return redirect('/')
 
-    return render_template('user_confirm_acct_delete.html', user_id=user_id)

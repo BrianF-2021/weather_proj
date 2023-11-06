@@ -34,7 +34,7 @@
                     {% if top_scores %}
                     {% for score in top_scores %}
                     <tr>
-                        <td class="pad">{{ score.users.first_name }} {{ score.users.last_name }}- ({{score.users.id}})
+                        <td class="pad">{{ score.users.first_name }} {{ score.users.last_name }}
                         </td>
                         <td class="pad">{{score.best}}</td>
                     </tr>
@@ -66,7 +66,7 @@
             </table>
         </div>
         <div class="optionsBar">
-                <a class="btns" href="/user/home">Home</a>
+                <a class="btns" href="/user_local_weather">Home</a>
                 <a class="btns" href="/game/{{this_game.name}}/{{this_game.id}}">Start Over</a>
         </div>
     </div>

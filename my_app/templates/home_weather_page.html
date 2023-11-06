@@ -14,6 +14,8 @@
 
     <link rel="stylesheet" href="{{ url_for('static', filename = 'css/navbar.css') }}">
 
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/styles.css') }}">
+
     <script type="text/javascript" src="{{ url_for('static', filename = 'script/navbar.js') }}" defer></script>
 
 
@@ -29,15 +31,13 @@
             <span class="bar"></span>
         </div>
         <div class="navbar-links">
-            <ul>
-              <li><a href="/user/home">Home</a></li>
-              <li><a class="links" href="/users/edit/{{this_user.id}}">Edit Profile</a></li>
-              <li><a class="links" href="/logout">Logout</a></li>
-            </ul>
+          <ul>
+            <li><a class="links" href="/create">Login</a></li>
+          </ul>
         </div>
     </nav>
     <div class="wx_search_bar">
-        <form action="/local_weather/{{this_user.id}}" method="POST">
+        <form action="/local_weather" method="POST">
             <div class="city_state_search">
                 <label for="city_state">Local Weather: </label>
                 <input type="text" name = "city_state" placeholder="City State">
@@ -49,7 +49,7 @@
   </div>
 
 
-  <div class = "main">
+  <div class = "main bg-image">
     {% if messages %}
       {% for message in messages %}
         <h3 class="message">{{message}}</h3>

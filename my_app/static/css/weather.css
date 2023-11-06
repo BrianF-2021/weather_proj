@@ -1,8 +1,8 @@
 :root {
     --body-bg: hsl(191, 94%, 65%);
-    --main-bg: hsl(194, 95%, 51%);
-    --card-bg: hsl(194, 89%, 71%);
-    --table-bg:hsl(191, 97%, 49%);
+    --main-bg: rgb(11, 193, 249);
+    --card-bg: rgba(95, 229, 253, .65);
+    --table-bg:rgba(95, 229, 253, .6);
     --text-size: 2rem;
 
 }
@@ -22,7 +22,7 @@ body {
     display: block;
     margin: 0 auto;
     width: 100vw;
-    background-color: var(--table-bg);
+    /* background-color: var(--table-bg); */
     border: solid 1px black;
     height: 100vh;
 }
@@ -40,7 +40,7 @@ body {
     padding: .5rem;
     display: block;
     width: 100%;
-    background-color: var(--main-bg);
+    /* background-color: var(--main-bg); */
     /* z-index: -5; */
     box-shadow: 5px 5px 5px 10px rgba(0,0,0, .6);
     min-width: 300px;
@@ -194,7 +194,7 @@ body {
 }
 
 .forecast_card{
-    background-color: var(--card-bg);
+    background-color: var(--table-bg);
     width: 100%;
     border: solid 1px #ccc;
     border-radius: 0.25rem;

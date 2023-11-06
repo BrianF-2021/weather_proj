@@ -33,9 +33,8 @@
             </div>
             <div class="navbar-links">
                 <ul>
-                    <li><a class="links" href="/user/home">Home</a></li>
-                    <li><a class="links" href="/users/edit/{{this_user.id}}">Edit Profile</a></li>
-                    <li><a class="links" href="/weather_page/{{this_user.id}}">Weather</a></li>
+                    <li><a class="links" href="/user_local_weather">Home</a></li>
+                    <li><a class="links" href="/user/edit/{{this_user.id}}">Edit Profile</a></li>
                     <li><a class="links" href="/logout">Logout</a></li>
                 </ul>
             </div>
@@ -92,7 +91,7 @@
                     </div>
                     <div class = "buttons_box">
                         <input class="edit-btn btn_save" class="button" type="submit" value = "Save">
-                        <a class="edit-btn btn_cancel" class="button" href="/users/edit/{{this_user.id}}">Cancel</a>
+                        <a class="edit-btn btn_cancel" class="button" href="/user/edit/{{this_user.id}}">Cancel</a>
                     </div>
                 </div>
                 </form>

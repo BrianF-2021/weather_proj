@@ -1,0 +1,124 @@
+*{
+    border: 0 none;
+    outline: 0;
+    padding: 0;
+    margin: 0;
+    }
+
+
+.popup {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+	background-color: rgba(50,50,50, .6);
+	/* background-color: rgba(265, 0, 0, .7); */
+	box-shadow: 5px 5px 5px rgba(0,0,0, .7);
+	border-radius: 30px;
+	z-index: 2;
+	position: absolute;
+	top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+	width: fit-content;
+	padding: 2rem;
+	height: fit-content;
+}
+
+.popup h1 {
+	text-align: center;
+	text-decoration: bolder;
+	font-size: 5rem;
+	border-radius: 10px;
+	animation: txt_color 6s ease-in-out infinite;
+}
+
+.popup div {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	width: 60%;
+
+}
+
+#delete_user {
+    background-color: red;
+    color: black;
+}
+
+#delete_user:hover {
+	background-color: rgba(230,0,0,1);
+	color: white;
+}
+
+#btn_cancel {
+    background-color: lightgrey;
+    color: black;
+}
+
+#btn_cancel:hover {
+	background-color: grey;
+	color: white;
+}
+
+.popup div a {
+
+	display: inline-block;
+	text-align: center;
+	width: fit-content;
+	height: fit-content;
+	/* width: 20%; */
+    padding: .2rem .3rem;
+    border-radius: 15px; 
+    text-decoration: none; 
+    border: 1px solid grey;
+    cursor: pointer;
+    font-size: 1.2rem;
+    box-shadow: 2px 2px 2px 2px;
+
+}
+
+.popup div a:hover	{
+	background-color: grey;
+	color: white
+}
+
+@media (max-width: 695px) {
+	.popup h1 {
+	font-size: 4rem;
+	}
+
+	.popup div {
+		width: 75%;
+	}
+
+}
+
+
+@keyframes txt_color
+{
+	0%
+	{
+
+		background-color: yellow;
+	}
+	25%
+	{
+		background-color: orange;
+	}
+	50%
+	{
+		background-color: red;
+		color: white;
+	}
+	75%
+	{
+
+		background-color: orange;
+		color: black;
+	}
+	100%
+	{
+		background-color: yellow;
+	}
+}
