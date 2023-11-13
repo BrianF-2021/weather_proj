@@ -1,6 +1,6 @@
 # from flask_app import app
 # from flask import render_template,redirect,request,session,flash
-from my_app.apis import weather_api
+from my_app.apis import weather_api, weather_gov
 from my_app.config.mysqlconnection import connectToMySQL
 from my_app import app
 from flask import render_template, redirect, request, session
@@ -20,13 +20,14 @@ def home_weather_page():
     all_games = game.Game.get_all_gamesObj()
     weather_obj = weather_api.Weather_Api(_city_state)
     current_wx = weather_obj.get_current_weather_data()
-    # print(current_wx.dt, current_wx.is_daytime)
     forecast_wx = weather_obj.get_daily_forecast()
-    # print('TESTING: ', forecast_wx, current_wx.temp)
+    
+    res = weather_gov.get_forecast_graph(current_wx.lat, current_wx.lon, current_wx.city_state)
+    
     messages = []
     messages.append("Login to save your location...plus new features!")
 
-    if forecast_wx == [] and current_wx.temp is None:
+    if forecast_wx == [] and current_wx.temp is None or res == False:
         messages.append("Failed to Connect to Weather Server!")
         return render_template("home_weather_page.html",
                                forecast_wx=forecast_wx,
@@ -42,7 +43,7 @@ def home_weather_page():
                                messages=messages)
 
 
-@ app.route('/local_weather', methods=['POST'])
+@ app.route('/search_local_weather', methods=['POST'])
 def local_weather():
 
     _city_state = request.form['city_state']
@@ -56,7 +57,9 @@ def local_weather():
     # print(current_wx.dt, current_wx.is_daytime)
     forecast_wx = weather_obj.get_daily_forecast()
     # print('TESTING: ', forecast_wx, current_wx.temp)
-    if forecast_wx == [] and current_wx.temp is None:
+    res = weather_gov.get_forecast_graph(current_wx.lat, current_wx.lon)
+
+    if forecast_wx == [] and current_wx.temp is None or res == False:
         messages = []
         messages.append("Failed to Connect to Weather Server!")
         return render_template("home_weather_page.html",
@@ -93,7 +96,9 @@ def user_search_local_weather():
     # print(current_wx.dt, current_wx.is_daytime)
     forecast_wx = weather_obj.get_daily_forecast()
     # print('TESTING: ', forecast_wx, current_wx.temp)
-    if forecast_wx == [] and current_wx.temp is None:
+    res = weather_gov.get_forecast_graph(current_wx.lat, current_wx.lon)
+
+    if forecast_wx == [] and current_wx.temp is None or res == False:
         messages = []
         messages.append("Failed to Connect to Weather Server!")
         return render_template("user_weather_page.html",
@@ -112,7 +117,6 @@ def user_search_local_weather():
                                messages=messages)
 
 
-# @ app.route('/user_local_weather/<int:user_id>', methods=['POST'])
 @ app.route('/user_local_weather')
 def user_local_weather():
     if 'id' not in session:
@@ -132,10 +136,10 @@ def user_local_weather():
 
     weather_obj = weather_api.Weather_Api(_city_state)
     current_wx = weather_obj.get_current_weather_data()
-    # print(current_wx.dt, current_wx.is_daytime)
     forecast_wx = weather_obj.get_daily_forecast()
-    # print('TESTING: ', forecast_wx, current_wx.temp)
-    if forecast_wx == [] and current_wx.temp is None:
+    res = weather_gov.get_forecast_graph(current_wx.lat, current_wx.lon)
+
+    if forecast_wx == [] and current_wx.temp is None or res == False:
         messages = []
         messages.append("Failed to Connect to Weather Server!")
         return render_template("user_weather_page.html",
@@ -154,40 +158,3 @@ def user_local_weather():
                                messages=messages)
 
 
-# @app.route('/weather_page/<int:user_id>')
-# def weather_page(user_id):
-#     if 'id' not in session:
-#         return redirect('/')
-#     user_data = {'id': user_id}
-#     this_user = usr.User.get_one(user_data)
-#     all_games = game.Game.get_all_gamesObj()
-
-#     messages = []
-#     _city_state = None
-#     if this_user.city and this_user.state:
-#         _city_state = f"{this_user.city} {this_user.state}"
-#     else:
-#         _city_state = "Key West FL"
-#         messages.append("No City and State has been saved to your profile.")
-
-#     weather_obj = weather_api.Weather_Api(_city_state)
-#     current_wx = weather_obj.get_current_weather_data()
-#     # print(current_wx.dt, current_wx.is_daytime)
-#     forecast_wx = weather_obj.get_daily_forecast()
-#     # print('TESTING: ', forecast_wx, current_wx.temp)
-#     if forecast_wx == [] and current_wx.temp is None:
-#         messages = []
-#         messages.append("Failed to Connect to Weather Server!")
-#         return render_template("user_weather_page.html",
-#                                forecast_wx=forecast_wx,
-#                                current_wx=current_wx,
-#                                this_user=this_user,
-#                                all_games=all_games,
-#                                messages=messages)
-#     if current_wx.temp and forecast_wx != []:
-#         return render_template("user_weather_page.html",
-#                                forecast_wx=forecast_wx,
-#                                current_wx=current_wx,
-#                                this_user=this_user,
-#                                all_games=all_games,
-#                                messages=messages)

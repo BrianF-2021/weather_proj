@@ -42,7 +42,7 @@ class Weather_Api:
             # print(f"'weather_api.py => get_json_wx_data' error: {e}")
             return
 
-        print("API data: ", api_data)
+        # print("API data: ", api_data)
         if api_data.status_code == 400:
             print("Check City/State Spelling")
             return
@@ -50,7 +50,7 @@ class Weather_Api:
         self.weather_data['lat'] = latitude
         self.weather_data['lon'] = longitude
         self.weather_data['city_state'] = self.city_state
-        print('city_state: ', self.weather_data['city_state'])
+        # print('city_state: ', self.weather_data['city_state'])
         return
 
     def determine_icon(self, id):
@@ -87,7 +87,7 @@ class Weather_Api:
             return current_weather.Current_Weather()
 
         current = self.weather_data['current']
-        print('CURRENT WEATHER: ', json.dumps(current, indent=4))
+        # print('CURRENT WEATHER: ', json.dumps(current, indent=4))
         _, _, sunrise = self.dt.get_datetime_formatted_from_unix(
             current['sunrise'])
         _, _, sunset = self.dt.get_datetime_formatted_from_unix(
@@ -210,7 +210,7 @@ class Weather_Api:
             day_obj.set_instance_attributes(data)
             if i <= 5:
                 self.forecast.append(day_obj)
-            print(f'DAY OBJECT {i}: {day_obj.icon}')
+            # print(f'DAY OBJECT {i}: {day_obj.icon}')
         return self.forecast
 
     def print_wx_data(self):

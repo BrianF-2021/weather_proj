@@ -3,7 +3,10 @@ import json
 from my_app.misc.search_algos import *
 # import math
 # from wx_graphing import plot_2_lines
+import os
 import matplotlib.pyplot as plt
+from my_app.error_logging import logger
+
 
 
 class Wx_Forecast:
@@ -64,7 +67,7 @@ def get_grid_info(lat, lon):
         gridY = json.loads(requests.get(grid_points_url).content.decode(
             "UTF-8"))["properties"]["gridY"]
     except Exception as e:
-        print(f"Check internet connection! \n\t{e}")
+        logger.logger.error(f"Check internet connection! \n\t{e}")
         return None
 # print(gridId, gridX, gridY)
     return gridId, int(gridX), int(gridY)
@@ -79,16 +82,20 @@ def get_forecast_daily(office, gridX, gridY):
 def get_forecast_hourly(office, gridX, gridY):
     url = f"https://api.weather.gov/gridpoints/{office}/{gridX},{gridY}/forecast/hourly"
     try:
-        res = json.loads(requests.get(url).content)
+        res = requests.get(url)
+        page = json.loads(res.content)
         # returns dictionary
     except Exception as e:
-        print(f"Check internet connection! \n\t{e}")
+        logger.logger.error(f"Check internet connection! \n\t{e}")
         return None
-
-    return res
+    if res.status_code == 200:
+        return page
+    return None
 
 
 def parse_hourly(data):
+    if not data:
+        return
     hourly_data = {}
     hourly_data["Start_Time"] = []
     hourly_data["End_Time"] = []
@@ -140,8 +147,92 @@ def parse_hourly(data):
     return hourly_data
 
 
-def plot_2_lines(data, hi_lo=None, title="Title", x_label="X Label", y_label="Y Label", line1_label="Line 1", line2_label="Line 2",  x_increment=12, y_increment=4, value_fnt_size=20,
-                 tick_fnt_size=20, legend_fnt_size=24, label_fnt_size=34):
+def plot_1_line(data, hi_lo=None, title="Title", x_label="X Label", y_label="Y Label", line_label="Line", x_increment=12, y_increment=4, value_fnt_size=14,
+                 tick_fnt_size=16, legend_fnt_size=16, label_fnt_size=16, title_fnt_size=24, y_min=None, y_max=None, value_color="red", x_tick_values=None, title_color="red"):
+    if not x_tick_values:
+        x_tick_values = range(len(data))
+    y = data
+
+    # Create a figure and axis
+    fig, ax = plt.subplots()
+
+    # Set axis labels and title
+    plt.title(title, fontsize=title_fnt_size, fontweight="bold", color=title_color)
+    plt.xlabel(x_label, fontsize=label_fnt_size, color="blue")
+    plt.ylabel(y_label, fontsize=label_fnt_size, color="blue")
+
+    # Plot the line
+    plt.plot(x_tick_values, y, label=line_label, color="orange")
+
+    # Add a legend
+    # ax.legend([title], fontsize=legend_fnt_size)
+
+    # Set x-axis limit to start at 0
+    plt.xlim(left=0, right=x_tick_values[-1])
+
+    # get mins and max of data
+    if not y_min and not y_max:
+        y_min = min(y)
+        y_max = max(y)
+
+    # set y-tick values and add horizontal grid lines
+    plt.yticks(range(y_min, y_max + 1, y_increment), fontsize=tick_fnt_size)
+    plt.grid(axis='y', linestyle='--', color='lightgray')
+
+    # Set x-tick values and add vertical grid lines
+    x_tick_locations = list(x_tick_values[::x_increment]) + [x_tick_values[-1]]
+    plt.xticks(x_tick_locations, fontsize=tick_fnt_size)
+    plt.grid(axis='x', linestyle='--', color='lightgray')
+
+    # Line values for last x_tick
+    last_x_tick = x_tick_values[-1]
+    last_y_value = y[-1]
+
+    # Add text annotations at each x-tick value
+    ha = "left"
+    va = "top"
+    x_tickval_increment_length = len(x_tick_values[::x_increment])
+    if hi_lo:
+        for x, y in hi_lo:
+            if x == 0:
+                ha = "left"
+                plt.text(x, y, str(y), ha=ha, va=va,
+                         fontsize=value_fnt_size, color=value_color)
+            elif x == len(data) - 1:
+                ha = "right"
+                plt.text(x, y, str(y), ha=ha, va=va,
+                         fontsize=value_fnt_size, color=value_color)
+            else:
+                ha = "left"
+                plt.text(x, y, str(y), ha=ha, va=va,
+                         fontsize=value_fnt_size, color=value_color)
+    if hi_lo is None:
+        ha = "left"
+        for cnt, val in enumerate(zip(x_tick_values[::x_increment], data[::x_increment])):
+            x, y = val
+            if cnt == x_tickval_increment_length-1 and data[x] == data[-1]:
+                ha = "right"
+                plt.text(x, y, str(y), ha=ha, va=va,
+                         fontsize=value_fnt_size, color=value_color)
+            elif cnt == x_tickval_increment_length-1 and data[x] != data[-1]:
+                ha = "left"
+                plt.text(x, y, str(y), ha=ha, va=va,
+                         fontsize=value_fnt_size, color=value_color)
+                ha = "right"
+                plt.text(last_x_tick, last_y_value, str(
+                    last_y_value), ha=ha, va=va, fontsize=value_fnt_size, color=value_color)
+            else:
+                plt.text(x, y, str(y), ha=ha, va=va,
+                         fontsize=value_fnt_size, color=value_color)
+
+    temp_title = title.lower().replace(" ", "_")
+    out_file = f'my_app/static/pics/{temp_title}_graph.png'
+    plt.savefig(out_file)
+
+
+
+def plot_2_lines(data, hi_lo=None, title="Title", x_label="X Label", y_label="Y Label", line1_label="Line 1", line2_label="Line 2",  x_increment=12, y_increment=4, value_fnt_size=14,
+                 tick_fnt_size=16, legend_fnt_size=16, label_fnt_size=16, title_fnt_size=24):
     x_tick_values = range(len(data[0]))
     temp_y = data[0]
     dew_y = data[1]
@@ -150,7 +241,7 @@ def plot_2_lines(data, hi_lo=None, title="Title", x_label="X Label", y_label="Y 
     fig, ax = plt.subplots()
 
     # Set axis labels and title
-    plt.title(title, fontsize=30, fontweight="bold", color="red")
+    plt.title(title, fontsize=title_fnt_size, fontweight="bold", color="red")
     plt.xlabel(x_label, fontsize=label_fnt_size, color="blue")
     plt.ylabel(y_label, fontsize=label_fnt_size, color="blue")
 
@@ -266,93 +357,89 @@ def plot_2_lines(data, hi_lo=None, title="Title", x_label="X Label", y_label="Y 
 #    plt.show()
 
 
-def find_peaks_valleys(lst):
+def find_peaks_valleys(data):
     peaks_valleys = []
-    peaks_valleys.append((0, (lst[0])))
+    peaks_valleys.append((0, (data[0])))
     direction = None
 
-    for i in range(1, len(lst)):
-        if lst[i-1] > lst[i] and (direction == "down" or direction is None):
+    for i in range(1, len(data)):
+        if i == len(data)-1:
+            peaks_valleys.append((i, (data[i])))
+
+        if data[i-1] > data[i] and direction is None:
             if direction is None:
                 direction = "down"
-            continue
-        if lst[i-1] < lst[i] and (direction == "up" or direction is None):
+        if data[i-1] < data[i] and direction is None:
             if direction is None:
                 direction = "up"
-            continue
-        if lst[i] == lst[i-1]:
-            continue
         # down -> up
-        if lst[i-1] < lst[i] and direction == "down":
+        if data[i-1] < data[i] and direction == "down":
             direction = "up"
-            peaks_valleys.append((i-1, lst[i-1]))
+            peaks_valleys.append((i-1, data[i-1]))
 
-    # up -> down
-        if lst[i-1] > lst[i] and direction == "up":
+        # up -> down
+        if data[i-1] > data[i] and direction == "up":
             direction = "down"
-            peaks_valleys.append((i-1, lst[i-1]))
-        if i == len(lst)-1:
-            peaks_valleys.append((i, (lst[i])))
+            peaks_valleys.append((i-1, data[i-1]))
+
     return peaks_valleys
 
 
-def main():
-    # Nashua NH coord
-    lat = 42.8356421
-    lon = -71.6473598
-    print(f"Lat: {lat}, Lon: {lon}")
+def peaks_valleys_24hr(data):
+    peaks_valleys = []
+    peaks_valleys.append((0, (data[0])))
+    max_val = -999999
+    min_val = 999999
+    for i, val in enumerate(data):
+        if i % 24 == 0:
+            max_val = -999999
+            min_val = 999999
+        if val > max_val:
+            max_val = val
+        if val < min_val:
+            min_val = val
+        if i == len(data)-1:
+            peaks_valleys.append((i, data[i]))
+
+
+
+def get_forecast_graph(lat, lon):
+    # Nashua NH coord for testing
+#     lat = 42.8356421
+#     lon = -71.6473598
+    #print(f"Lat: {lat}, Lon: {lon}")
+
+    files_to_delete = ["/home/bfair/Desktop/myDesktop/Coding Dojo/Python Stack/PyMySQLProjects/python_app_projects/my_app/static/pics/3_day_temperature_graph.png",
+                        "/home/bfair/Desktop/myDesktop/Coding Dojo/Python Stack/PyMySQLProjects/python_app_projects/my_app/static/pics/3_day_humidity_graph.png", 
+                        "/home/bfair/Desktop/myDesktop/Coding Dojo/Python Stack/PyMySQLProjects/python_app_projects/my_app/static/pics/3_day_precipitation_graph.png"]
+    for file_path in files_to_delete:
+        try:
+            os.remove(file_path)
+            print(f'The file {file_path} has been deleted successfully.')
+        except OSError as e:
+            logger.logger.error(f"File Deletion Error: {e.filename} - {e.strerror}")
+
     grid_data = get_grid_info(lat, lon)
     if not grid_data:
-        return
+        return False
     gridId, gridX, gridY = grid_data
     raw_data = get_forecast_hourly(gridId, gridX, gridY)
     if not raw_data:
-        return
-    print("="*40)
+        return False
     hourly_data = parse_hourly(raw_data)
-    graphing_data = [hourly_data["Temperature_F"],  hourly_data["Dewpoint_F"]]
-    peaks_valleys = find_peaks_valleys(graphing_data[0])
-# print("="*40)
-# print(len(graphing_data[0]))
-# print(graphing_data)
-# print("="*40)
-    title = "Nashua, NH\nTemperature and Dewpoint"
-    y_label = "TEMPERATURE (F)"
-    x_label = "TIME (HRS)"
-    dewpoint = "Dewpoint"
-    temperature = "Temperature"
-    plot_2_lines(graphing_data, hi_lo=peaks_valleys, x_label=x_label, y_label=y_label,
-                 x_increment=12, y_increment=4, line2_label=dewpoint, line1_label=temperature, title=title)
-# plot_2_lines(graphing_data, x_label=x_label, y_label=y_label,x_increment=12, y_increment=4, line2_label=dewpoint, line1_label=temperature, title=title)
+    graphing_data = [hourly_data["Temperature_F"][:73],  hourly_data["Humidity"][:73], hourly_data["Percent_Precipitation"][:73]]
+    temp_peaks_valleys = find_peaks_valleys(graphing_data[0])
+    humidity_peaks_valleys = find_peaks_valleys(graphing_data[1])
+    pop_peaks_valleys = find_peaks_valleys(graphing_data[2])
+    x_label = "Time From Last Refresh (hrs)"
 
-    # url = f"https://api.weather.gov/points/{lat},{lon}"
-    # res = requests.get(url)
-    # print(res.content.decode("UTF-8"))
-
-
-##################
-#################
-
-#   	dew_y_increments = zip(x_tick_values[::x_increment], dew_y[::x_increment])
-#    	temp_y_increments = zip(x_tick_values[::x_increment], temp_y[::x_increment])
-#    	for i in range(len(temp_y_increments)):
-#    		tempX, tempY= temp_y_increments
-#    		dewX, dewY = dew_y_increments
-#    		dx = dewX[i]
-#    		dy = dewY[i]
-#    		tx = tempX[i]
-#    		ty = tempY[i]
-#    		if cnt == x_tickval_increment_length-1 and dew_y[x] == dew_y[-1]:
-# ha = "right"
-# plt.text(x, y, str(dew_y_increments), ha=ha, va='bottom', fontsize=value_fnt_size, color="brown")
-# plt.text(x, y, str(temp_y_increments[index]), ha=ha, va='bottom', fontsize=value_fnt_size, color="red")
-#    		elif cnt == x_tickval_increment_length-1 and dew_y[dewX] != dew_y[-1]:
-#    		   plt.text(x, y, str(dew_y_increments), ha=ha, va='bottom', fontsize=value_fnt_size, color="brown")
-#    		   plt.text(x, y, str(temp_y_increments[index]), ha=ha, va='bottom', fontsize=value_fnt_size, color="red")
-#    		   ha = "right"
-#    		   plt.text(last_x_tick, last_line2_value, str(last_line2_value), ha=ha, va='bottom', fontsize=value_fnt_size, color="brown")
-#    		   plt.text(last_x_tick, last_line1_value, str(last_line1_value), ha=ha, va='bottom', fontsize=value_fnt_size, color="red")
-#    		else:
-#    		   plt.text(x, y, str(dew_y_increments), ha=ha, va='bottom', fontsize=value_fnt_size, color="brown")
-#    		   plt.text(x, y, str(temp_y_increments[index]), ha=ha, va='bottom', fontsize=value_fnt_size, color="red")
-#    	cnt += 1
+    plot_1_line(graphing_data[0], hi_lo=0, title="3 Day Temperature", x_label=x_label, y_label="Temperature (F)", x_increment=12, y_increment=3, value_fnt_size=14,
+                 tick_fnt_size=16, legend_fnt_size=16, label_fnt_size=16, title_fnt_size=24)
+    
+    plot_1_line(graphing_data[1], hi_lo=0, title="3 Day Humidity", x_label=x_label, y_label="Humidity (%)", x_increment=12, y_increment=10, value_fnt_size=14,
+                 tick_fnt_size=16, legend_fnt_size=16, label_fnt_size=16, title_fnt_size=24, y_min=0, y_max=100)
+    
+    plot_1_line(graphing_data[2], hi_lo=0, title="3 Day Precipitation", x_label=x_label, y_label="Precipitation (%)", x_increment=12, y_increment=10, value_fnt_size=14,
+               tick_fnt_size=16, legend_fnt_size=16, label_fnt_size=16, title_fnt_size=24, y_min=0, y_max=100)
+    return True
+    

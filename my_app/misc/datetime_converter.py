@@ -50,7 +50,7 @@ class DateTime_Converter:
         dt_object = datetime.utcfromtimestamp(dt_unix)
         time_list = dt_object.strftime("%H:%M:%S").split(":")
         hours, minutes, seconds = time_list
-        print('TIME: ', time_list)
+        #print('TIME: ', time_list)
         return hours, minutes, seconds
 
     def is_daytime_from_unix(self, dt_unix=None, zone_offset=None):
@@ -60,16 +60,15 @@ class DateTime_Converter:
             # zone_offset = -32400
             zone_offset = -14400
             temp_time = dt_unix + zone_offset
-            print(
-                f'Offset: {zone_offset}, dt_unix: {dt_unix}, temp_time: {temp_time}')
+            #print(f'Offset: {zone_offset}, dt_unix: {dt_unix}, temp_time: {temp_time}')
             dt_unix = temp_time
         _24hr, _, _ = self.convert_unix_to_24hr_min_sec(dt_unix)
-        print('(2) 24 HOUR: ', _24hr)
+        #print('(2) 24 HOUR: ', _24hr)
         if (int(_24hr) >= 6) and (int(_24hr) <= 20):
             # DAY TIME
-            print("Day Time")
+            #print("Day Time")
             return True
-        print("Night Time")
+        #print("Night Time")
         return False
 
     def current_loc_unix_timezone_offset_converter(self, dt_unix, timezone_offset):

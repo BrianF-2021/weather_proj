@@ -21,5 +21,5 @@ class GeoLocator:
         if location:
             lat = location.latitude
             lon = location.longitude
-            print(f"lat: {location.latitude} lon: {location.longitude}")
+ #           print(f"lat: {location.latitude} lon: {location.longitude}")
         return (lat, lon)

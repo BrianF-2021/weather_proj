@@ -22,7 +22,7 @@
 
 
 </head>
-<body>
+<body class="bg-image">
   <div class="top_bar">
 
     <nav class="navbar">
@@ -57,7 +57,7 @@
   </div>
 
 
-  <div class = "main bg-image">
+  <div class = "main">
     {% if messages %}
       {% for message in messages %}
         <h3 class="message">{{message}}</h3>
@@ -209,6 +209,13 @@
 
     </div>
     {% endif %}
+    <div class="graph_box">
+      <div class="graphs">
+        <img src="/static/pics/3_day_temperature_graph.png" alt="Temperature Graph"></img>
+        <img src="/static/pics/3_day_humidity_graph.png" alt="Humidity Graph"></img>
+        <img src="/static/pics/3_day_precipitation_graph.png" alt="Precipitation Graph"></img>
+      </div>
+    </div>
 
   </div>
 </body>

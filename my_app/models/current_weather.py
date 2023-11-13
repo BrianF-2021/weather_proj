@@ -24,8 +24,6 @@ class Current_Weather:
         self.timezone_offset = None
         self.dt = DTC().get_datetime_formatted_from_dt_obj()
         self.is_daytime = DTC().is_daytime_from_unix()
-        print(
-            f'Current_Weather.py dt: {self.dt} is_daytime: {self.is_daytime}')
         self.sunrise = None
         self.sunset = None
         self.temp = None
@@ -50,7 +48,6 @@ class Current_Weather:
 
     def set_instance_attributes(self, data):
         # self.user_id = data['user_id']
-        print(f"DATA['dt'] = {data['dt']}")
         self.city_state = data['city_state']
         self.lat = data['lat']
         self.lon = data['lon']
@@ -120,6 +117,8 @@ class Current_Weather:
         }
         # returns id of object created/inserted
         return connectToMySQL(cls.db).query_db(query, data)
+
+
 
 # user_id,lat,lon,timezone_offset,dt,sunrise,sunset,temp,feels_like,pressure,humidity,dew_point,uvi,clouds,visibility,wind_speed,wind_deg,wind_gust,weatherId,description,icon,rain,snow,created_at,updated_at
 

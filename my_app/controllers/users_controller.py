@@ -1,5 +1,4 @@
 from my_app.apis import geo_locator_api, weather_api
-from my_app.apis.get_wx_forecast import main
 from my_app.config.mysqlconnection import connectToMySQL
 from my_app import app
 from flask import render_template, redirect, request, session
@@ -102,7 +101,7 @@ def editing_user_password(id):
         'password': request.form['new_password']
     }
     if not usr.User.user_edit_password_validation(validation_data):
-        return redirect(f'/users/edit_pw/{id}')
+        return redirect(f'/user/edit_pw/{id}')
     usr.User.update_password(update_data)
     # return redirect(f'/users/edit_pw/{id}')
     return redirect(f'/user/edit/complete')
