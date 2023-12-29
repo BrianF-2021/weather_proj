@@ -409,9 +409,9 @@ def get_forecast_graph(lat, lon):
 #     lon = -71.6473598
     #print(f"Lat: {lat}, Lon: {lon}")
 
-    files_to_delete = ["/home/bfair/Desktop/myDesktop/Coding Dojo/Python Stack/PyMySQLProjects/python_app_projects/my_app/static/pics/3_day_temperature_graph.png",
-                        "/home/bfair/Desktop/myDesktop/Coding Dojo/Python Stack/PyMySQLProjects/python_app_projects/my_app/static/pics/3_day_humidity_graph.png", 
-                        "/home/bfair/Desktop/myDesktop/Coding Dojo/Python Stack/PyMySQLProjects/python_app_projects/my_app/static/pics/3_day_precipitation_graph.png"]
+    files_to_delete = ["/home/bfair/Desktop/working_desktop/myDesktop/Coding Dojo/Python Stack/PyMySQLProjects/python_app_projects/my_app/static/pics/3_day_temperature_graph.png",
+                        "/home/bfair/Desktop/working_desktop/myDesktop/Coding Dojo/Python Stack/PyMySQLProjects/python_app_projects/my_app/static/pics/3_day_humidity_graph.png", 
+                        "/home/bfair/Desktop/working_desktop/myDesktop/Coding Dojo/Python Stack/PyMySQLProjects/python_app_projects/my_app/static/pics/3_day_precipitation_graph.png"]
     for file_path in files_to_delete:
         try:
             os.remove(file_path)

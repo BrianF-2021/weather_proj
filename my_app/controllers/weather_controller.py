@@ -22,13 +22,20 @@ def home_weather_page():
     current_wx = weather_obj.get_current_weather_data()
     forecast_wx = weather_obj.get_daily_forecast()
     
-    res = weather_gov.get_forecast_graph(current_wx.lat, current_wx.lon, current_wx.city_state)
+    res = weather_gov.get_forecast_graph(current_wx.lat, current_wx.lon)
     
     messages = []
     messages.append("Login to save your location...plus new features!")
 
-    if forecast_wx == [] and current_wx.temp is None or res == False:
+    if forecast_wx == [] and current_wx.temp is None:
         messages.append("Failed to Connect to Weather Server!")
+        return render_template("home_weather_page.html",
+                               forecast_wx=forecast_wx,
+                               current_wx=current_wx,
+                               all_games=all_games,
+                               messages=messages)
+    if not res:
+        messages.append("Failed to Connect to Weather Server for Graph Data!")
         return render_template("home_weather_page.html",
                                forecast_wx=forecast_wx,
                                current_wx=current_wx,
@@ -58,10 +65,15 @@ def local_weather():
     forecast_wx = weather_obj.get_daily_forecast()
     # print('TESTING: ', forecast_wx, current_wx.temp)
     res = weather_gov.get_forecast_graph(current_wx.lat, current_wx.lon)
-
-    if forecast_wx == [] and current_wx.temp is None or res == False:
-        messages = []
+    messages = []
+    if forecast_wx == [] and current_wx.temp is None:
         messages.append("Failed to Connect to Weather Server!")
+        return render_template("home_weather_page.html",
+                               forecast_wx=forecast_wx,
+                               current_wx=current_wx,
+                               messages=messages)
+    if not res:
+        messages.append("Failed to Connect to Weather Server for Graph Data!")
         return render_template("home_weather_page.html",
                                forecast_wx=forecast_wx,
                                current_wx=current_wx,
@@ -97,10 +109,18 @@ def user_search_local_weather():
     forecast_wx = weather_obj.get_daily_forecast()
     # print('TESTING: ', forecast_wx, current_wx.temp)
     res = weather_gov.get_forecast_graph(current_wx.lat, current_wx.lon)
-
-    if forecast_wx == [] and current_wx.temp is None or res == False:
-        messages = []
+    
+    messages = []
+    if forecast_wx == [] and current_wx.temp is None:
         messages.append("Failed to Connect to Weather Server!")
+        return render_template("user_weather_page.html",
+                               forecast_wx=forecast_wx,
+                               current_wx=current_wx,
+                               all_games=all_games,
+                               this_user=this_user,
+                               messages=messages)
+    if not res:
+        messages.append("Failed to Connect to Weather Server for Graph Data!")
         return render_template("user_weather_page.html",
                                forecast_wx=forecast_wx,
                                current_wx=current_wx,
@@ -139,9 +159,17 @@ def user_local_weather():
     forecast_wx = weather_obj.get_daily_forecast()
     res = weather_gov.get_forecast_graph(current_wx.lat, current_wx.lon)
 
-    if forecast_wx == [] and current_wx.temp is None or res == False:
-        messages = []
+    messages = []
+    if forecast_wx == [] and current_wx.temp is None:
         messages.append("Failed to Connect to Weather Server!")
+        return render_template("user_weather_page.html",
+                               forecast_wx=forecast_wx,
+                               current_wx=current_wx,
+                               all_games=all_games,
+                               this_user=this_user,
+                               messages=messages)
+    if not res:
+        messages.append("Failed to Connect to Weather Server for Graph Data!")
         return render_template("user_weather_page.html",
                                forecast_wx=forecast_wx,
                                current_wx=current_wx,
