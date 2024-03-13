@@ -6,12 +6,10 @@
 # from flask import render_template,redirect,request,session,flash
 from crypt import methods
 from urllib import response
-from my_app.config.mysqlconnection import connectToMySQL
-# from flask_app.models.user import User
 from my_app import app
 from my_app.games import mine_sweeper_tkinter, tic_tac_toe_tkinter
 from my_app.models import score, best_score, game
-from flask import render_template, redirect, request, session, jsonify, make_response
+from flask import render_template, redirect, request, session, jsonify
 from my_app.models import user as usr
 
 

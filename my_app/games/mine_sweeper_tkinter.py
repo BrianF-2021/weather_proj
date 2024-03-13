@@ -5,41 +5,6 @@ import random
 from collections import deque
 import math
 
-#root = Tk()
-# class Level():
-
-# 	def __init__(self):
-# 		self.level = .1
-# 		self.size_r = 12
-# 		self.size_c = 12
-
-# 	def change_level(self, lvl):
-# 		#height/number of rows
-# 		#self.size_r = 12
-# 		#width/number of columns
-# 		#self.size_c = 12
-# 		if lvl == "Easy":
-# 			self.size_r = 12
-# 			self.size_c = 12
-# 			self.lvl = .1
-
-# 		if lvl == "Med":
-# 			#324sq @ 40bombs
-# 			self.size_r = 18
-# 			self.size_c = 18
-# 			self.lvl = .15
-
-# 		if lvl == "Hard":
-# 			#625sq @ 78bombs
-# 			self.size_r = 25
-# 			self.size_c = 25
-# 			self.lvl = .2
-
-# 		return (self.lvl, self.size_r, self.size_c)
-
-
-
-
 
 class Mine_Sweeper():
 	def __init__(self):

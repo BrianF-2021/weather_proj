@@ -98,8 +98,8 @@
       </div>
 
 
-      <div class="current_conditions_tbl">
-        <h3 id="current_conditions_title">Current Conditions</h3>
+ '     <div class="current_conditions_tbl">
+        <h3 class="conditions_title">Current Conditions</h3>
         <hr>
 
         <div class="table_row">
@@ -209,12 +209,91 @@
 
     </div>
     {% endif %}
+
+    <h2 class="title">~ 3 Day Graph Forecast ~</h2>
+
     <div class="graph_box">
       <div class="graphs">
         <img src="/static/pics/3_day_temperature_graph.png" alt="Temperature Graph"></img>
         <img src="/static/pics/3_day_humidity_graph.png" alt="Humidity Graph"></img>
         <img src="/static/pics/3_day_precipitation_graph.png" alt="Precipitation Graph"></img>
       </div>
+    </div>
+
+
+    <h2 class="title">~ 2 Day History ~</h2>
+    <div class="history_box">
+
+      <div class="history_conditions_tbl">
+        <h3 class="conditions_title">{{ history_day2.prev_day_date }} </h3>
+        <hr>
+        <div class="table_row">
+            <h4>Weather: </h4>
+            <p>{{ history_day2.conditions }}</p>
+        </div>
+
+        <div class="table_row">
+          <h4>Temperature F: </h4>
+          <p>{{ history_day2.temp_min }} min / {{ history_day2.temp_max }} max</p>
+        </div>
+
+        <div class="table_row">
+          <h4>Wind (mph): </h4>
+          <p>{{ history_day2.wind_min }} min / {{ history_day2.wind_max }} max</p>
+        </div>
+
+        <div class="table_row">
+          <h4>Wind Gust (mph): </h4>
+          <p>{{ history_day2.wind_max_gust }}</p>
+        </div>
+
+        <div class="table_row">
+          <h4>Pressure (inHg): </h4>
+          <p>{{ history_day2.pressure_min }} min / {{ history_day2.pressure_max }} max</p>
+        </div>
+
+        <div class="table_row">
+          <h4>Precipitation (in): </h4>
+          <p>{{ history_day2.precipitation }}</p>
+
+        </div>
+      </div>
+
+
+      <div class="history_conditions_tbl">
+        <h3 class="conditions_title">{{ history_day1.prev_day_date }} </h3>
+        <hr>
+        <div class="table_row">
+            <h4>Weather: </h4>
+            <p>{{ history_day1.conditions }}</p>
+        </div>
+
+        <div class="table_row">
+          <h4>Temperature F: </h4>
+          <p>{{ history_day1.temp_min }} min / {{ history_day1.temp_max }} max</p>
+        </div>
+
+        <div class="table_row">
+          <h4>Wind (mph): </h4>
+          <p>{{ history_day1.wind_min }} min / {{ history_day1.wind_max }} max</p>
+        </div>
+
+        <div class="table_row">
+          <h4>Wind Gust (mph): </h4>
+          <p>{{ history_day1.wind_max_gust }}</p>
+        </div>
+
+        <div class="table_row">
+          <h4>Pressure (inHg): </h4>
+          <p>{{ history_day1.pressure_min }} min / {{ history_day1.pressure_max }} max</p>
+        </div>
+
+        <div class="table_row">
+          <h4>Precipitation (in): </h4>
+          <p>{{ history_day1.precipitation }}</p>
+        </div>
+      </div>
+
     </div>
 
   </div>

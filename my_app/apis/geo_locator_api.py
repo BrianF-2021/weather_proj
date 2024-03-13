@@ -12,12 +12,9 @@ class GeoLocator:
         try:
             location = self.geolocator.geocode(city_state)
         except Exception as e:
-
             logger.logger.error(
                 f"'geo_locator_api.py => get_coord(), line 17' error: {e}")
-            # print(f"GeoLocator 'get_coord' error: {e}")
             return (lat, lon)
-        # print("GEOLOCATOR: location - ", location)
         if location:
             lat = location.latitude
             lon = location.longitude

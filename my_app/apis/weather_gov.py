@@ -1,8 +1,6 @@
 import requests
 import json
 from my_app.misc.search_algos import *
-# import math
-# from wx_graphing import plot_2_lines
 import os
 import matplotlib.pyplot as plt
 from my_app.error_logging import logger
@@ -67,16 +65,19 @@ def get_grid_info(lat, lon):
         gridY = json.loads(requests.get(grid_points_url).content.decode(
             "UTF-8"))["properties"]["gridY"]
     except Exception as e:
-        logger.logger.error(f"Check internet connection! \n\t{e}")
+        logger.logger.error(f"Check internet connection! get_grid_info()\n\t{e}")
         return None
-# print(gridId, gridX, gridY)
+    print(gridId, gridX, gridY)
     return gridId, int(gridX), int(gridY)
 
+# def get_stations():
+#     url = f"https://api.weather.gov/gridpoints/{office}/{gridX},{gridY}/stations"
+#     res = requests.get(url).content.decode("UTF-8")
 
-def get_forecast_daily(office, gridX, gridY):
-    url = f"https://api.weather.gov/gridpoints/{office}/{gridX},{gridY}/forecast"
-    res = requests.get(url).content.decode("UTF-8")
-    # print(res)
+# def get_forecast_daily(office, gridX, gridY):
+#     url = f"https://api.weather.gov/gridpoints/{office}/{gridX},{gridY}/forecast"
+#     res = requests.get(url).content.decode("UTF-8")
+#     #print(res)
 
 
 def get_forecast_hourly(office, gridX, gridY):
@@ -84,9 +85,8 @@ def get_forecast_hourly(office, gridX, gridY):
     try:
         res = requests.get(url)
         page = json.loads(res.content)
-        # returns dictionary
     except Exception as e:
-        logger.logger.error(f"Check internet connection! \n\t{e}")
+        logger.logger.error(f"Check internet connection! get_forecast_hourly\n\t{e}")
         return None
     if res.status_code == 200:
         return page
@@ -110,12 +110,8 @@ def parse_hourly(data):
     hourly_data["Short_Forecast"] = []
 
     data_list = data["properties"]["periods"]
-# section = json.dumps(data_list[155], indent=4)
-# print(f"({len(data_list)}) {section}")
 
     for i, entry in enumerate(data_list):
-        # section = json.dumps(entry, indent=4)
-        # print(f"({i}) {section}")
 
         hourly_data["Start_Time"].append(parse_time_stamp(entry["startTime"]))
 
@@ -141,9 +137,7 @@ def parse_hourly(data):
         hourly_data["Wind_Direction"].append(entry["windDirection"].lower())
 
         hourly_data["Short_Forecast"].append(entry["shortForecast"])
-# result.append(hourly_data)
-# print(f"({i} of {len(data_list)}):\n{hourly_data}")
-# input("Next....")
+
     return hourly_data
 
 
@@ -236,7 +230,6 @@ def plot_2_lines(data, hi_lo=None, title="Title", x_label="X Label", y_label="Y 
     x_tick_values = range(len(data[0]))
     temp_y = data[0]
     dew_y = data[1]
-  #  print(f"GRAPHING DATA: {temp_y}\n{dew_y}")
     # Create a figure and axis
     fig, ax = plt.subplots()
 

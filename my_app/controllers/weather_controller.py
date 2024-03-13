@@ -1,11 +1,12 @@
 # from flask_app import app
 # from flask import render_template,redirect,request,session,flash
-from my_app.apis import weather_api, weather_gov
-from my_app.config.mysqlconnection import connectToMySQL
+from my_app.apis import weather_api, weather_gov, wx_gov_2day_history 
 from my_app import app
 from flask import render_template, redirect, request, session
 from my_app.models import current_weather, game, user as usr, city_state
 from my_app.misc.datetime_converter import DateTime_Converter as DTC
+import time
+
 
 
 @app.route('/')
@@ -17,11 +18,11 @@ def index():
 @app.route('/home_weather_page')
 def home_weather_page():
     _city_state = "Key West FL"
-    all_games = game.Game.get_all_gamesObj()
+    # all_games = game.Game.get_all_gamesObj()
+
     weather_obj = weather_api.Weather_Api(_city_state)
     current_wx = weather_obj.get_current_weather_data()
     forecast_wx = weather_obj.get_daily_forecast()
-    
     res = weather_gov.get_forecast_graph(current_wx.lat, current_wx.lon)
     
     messages = []
@@ -32,21 +33,18 @@ def home_weather_page():
         return render_template("home_weather_page.html",
                                forecast_wx=forecast_wx,
                                current_wx=current_wx,
-                               all_games=all_games,
                                messages=messages)
     if not res:
         messages.append("Failed to Connect to Weather Server for Graph Data!")
         return render_template("home_weather_page.html",
                                forecast_wx=forecast_wx,
                                current_wx=current_wx,
-                               all_games=all_games,
                                messages=messages)
 
     if current_wx.temp and forecast_wx != []:
         return render_template("home_weather_page.html",
                                forecast_wx=forecast_wx,
                                current_wx=current_wx,
-                               all_games=all_games,
                                messages=messages)
 
 
@@ -61,9 +59,7 @@ def local_weather():
 
     weather_obj = weather_api.Weather_Api(_city_state)
     current_wx = weather_obj.get_current_weather_data()
-    # print(current_wx.dt, current_wx.is_daytime)
     forecast_wx = weather_obj.get_daily_forecast()
-    # print('TESTING: ', forecast_wx, current_wx.temp)
     res = weather_gov.get_forecast_graph(current_wx.lat, current_wx.lon)
     messages = []
     if forecast_wx == [] and current_wx.temp is None:
@@ -105,19 +101,24 @@ def user_search_local_weather():
 
     weather_obj = weather_api.Weather_Api(_city_state)
     current_wx = weather_obj.get_current_weather_data()
-    # print(current_wx.dt, current_wx.is_daytime)
     forecast_wx = weather_obj.get_daily_forecast()
-    # print('TESTING: ', forecast_wx, current_wx.temp)
     res = weather_gov.get_forecast_graph(current_wx.lat, current_wx.lon)
-    
+    history_day1, history_day2 = wx_gov_2day_history.get_2day_weather_history(_city_state)
+    history_date1, history_date2 = wx_gov_2day_history.get_2day_history_dates()
+    no_history_day1 = wx_gov_2day_history.No_Wx_Data(history_date1)
+    no_history_day2 = wx_gov_2day_history.No_Wx_Data(history_date2)
+
     messages = []
-    if forecast_wx == [] and current_wx.temp is None:
+    if forecast_wx == [] and current_wx.temp == "":
         messages.append("Failed to Connect to Weather Server!")
+        messages.append("Check City and State Spelling!")
         return render_template("user_weather_page.html",
                                forecast_wx=forecast_wx,
                                current_wx=current_wx,
                                all_games=all_games,
                                this_user=this_user,
+                               history_day1=no_history_day1,
+                               history_day2=no_history_day2,
                                messages=messages)
     if not res:
         messages.append("Failed to Connect to Weather Server for Graph Data!")
@@ -126,6 +127,8 @@ def user_search_local_weather():
                                current_wx=current_wx,
                                all_games=all_games,
                                this_user=this_user,
+                               history_day1=history_day1,
+                               history_day2=history_day2,
                                messages=messages)
 
     if current_wx.temp and forecast_wx != []:
@@ -134,6 +137,8 @@ def user_search_local_weather():
                                current_wx=current_wx,
                                all_games=all_games,
                                this_user=this_user,
+                               history_day1=history_day1,
+                               history_day2=history_day2,
                                messages=messages)
 
 
@@ -144,7 +149,7 @@ def user_local_weather():
 
     user_data = {'id': session['id']}
     this_user = usr.User.get_one(user_data)
-    all_games = game.Game.get_all_gamesObj()
+    # all_games = game.Game.get_all_gamesObj()
 
     messages = []
     _city_state = None
@@ -157,23 +162,18 @@ def user_local_weather():
     weather_obj = weather_api.Weather_Api(_city_state)
     current_wx = weather_obj.get_current_weather_data()
     forecast_wx = weather_obj.get_daily_forecast()
+    time.sleep(1)
     res = weather_gov.get_forecast_graph(current_wx.lat, current_wx.lon)
-
+    history_day1 = wx_gov_2day_history.get_2day_weather_history(_city_state)[0]
+    history_day2 = wx_gov_2day_history.get_2day_weather_history(_city_state)[1]
     messages = []
     if forecast_wx == [] and current_wx.temp is None:
         messages.append("Failed to Connect to Weather Server!")
         return render_template("user_weather_page.html",
                                forecast_wx=forecast_wx,
                                current_wx=current_wx,
-                               all_games=all_games,
-                               this_user=this_user,
-                               messages=messages)
-    if not res:
-        messages.append("Failed to Connect to Weather Server for Graph Data!")
-        return render_template("user_weather_page.html",
-                               forecast_wx=forecast_wx,
-                               current_wx=current_wx,
-                               all_games=all_games,
+                               history_day1=history_day1,
+                               history_day2=history_day2,
                                this_user=this_user,
                                messages=messages)
 
@@ -181,7 +181,8 @@ def user_local_weather():
         return render_template("user_weather_page.html",
                                forecast_wx=forecast_wx,
                                current_wx=current_wx,
-                               all_games=all_games,
+                               history_day1=history_day1,
+                               history_day2=history_day2,
                                this_user=this_user,
                                messages=messages)
 

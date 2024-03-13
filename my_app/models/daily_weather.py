@@ -85,27 +85,3 @@ class Daily_Weather:
             this_weather.append(weather)
         return this_weather
 
-
-#     @classmethod
-#     def get_one(cls, data):
-#         query = "SELECT * FROM users WHERE users.id = %(id)s;"
-#         result = connectToMySQL(cls.db).query_db(query, data)
-#         return cls(result[0])
-
-#     @classmethod
-#     def save(cls, data):
-#         print("data:", data)
-#         query = "INSERT INTO users(first_name, last_name, email, created_at, updated_at) VALUES(%(first_name)s, %(last_name)s, %(email)s, NOW(), NOW());"
-
-#         data = {
-#             'first_name': data['first_name'],
-#             'last_name': data['last_name'],
-#             'email': data['email']
-#         }
-#         # returns id of object created/inserted
-#         return connectToMySQL(cls.db).query_db(query, data)
-
-#     @classmethod
-#     def delete(cls, data):
-#         query = "DELETE FROM users WHERE id = %(id)s;"
-#         return connectToMySQL(cls.db).query_db(query, data)

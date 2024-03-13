@@ -36,7 +36,6 @@ class City_State:
 
     @classmethod
     def save(cls, data):
-        # print("data:", data)
         query = "INSERT INTO cities_states(city_state) VALUES(%(city_state)s);"
         data = {
             "city_state": data['city_state'],

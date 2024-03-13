@@ -28,7 +28,6 @@ def logout():
 
 
 @app.route('/user/validation', methods=['POST'])
-# def login_validation():
 def user_validation():
     data = {
         'email': request.form['email'],
@@ -41,7 +40,6 @@ def user_validation():
     this_user = usr.User.get_one_by_email(data)
     session['id'] = this_user.id
     return redirect("/user_local_weather")
-    # return redirect('/user/home')
 
 
 @app.route("/user/edit/<int:user_id>")
@@ -81,7 +79,6 @@ def edit_user_password(user_id):
         'id': user_id
     }
     this_user = usr.User.get_one(data)
-
     return render_template('user_edit_pw_form.html', this_user=this_user)
 
 
@@ -103,7 +100,6 @@ def editing_user_password(id):
     if not usr.User.user_edit_password_validation(validation_data):
         return redirect(f'/user/edit_pw/{id}')
     usr.User.update_password(update_data)
-    # return redirect(f'/users/edit_pw/{id}')
     return redirect(f'/user/edit/complete')
 
 
@@ -117,7 +113,6 @@ def edit_complete():
     }
     this_user = usr.User.get_one(data)
     message = 'You have successfully updated your profile'
-    # return render_template('user_profile_edit_complete.html', message=message, this_user=this_user)
     return render_template('user_profile_edit_complete.html', message=message, this_user=this_user)
 
 

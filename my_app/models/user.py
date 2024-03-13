@@ -135,12 +135,9 @@ class User:
         if not this_user:
             is_valid = False
             flash('Invalid Login Credentials')
-            # print(f"Login Validation: No user by {email}")
             return is_valid
 
         if this_user:
-            # print('True', this_user)
-            # print('USER NAME', this_user.first_name)
             if data['email'] == "":
                 flash("An email address is required")
                 is_valid = False
